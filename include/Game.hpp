@@ -1,8 +1,20 @@
+#include "player.hpp"
+#include <raylib.h>
+
 class Game {
 public:
-  Game();
-  virtual ~Game();
+  Game() : SCREEN_WIDTH(800), SCREEN_HEIGHT(600){};
+  virtual ~Game() { delete player; };
+  void Render();
+  void InitEntity();
+  void Init();
 
 private:
-  /* data */
+public:
+  // global const here
+  const int SCREEN_WIDTH;
+  const int SCREEN_HEIGHT;
+
+private:
+  Player *player;
 };
