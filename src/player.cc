@@ -3,7 +3,7 @@
 
 Player::Player()
 {
-    m_frameSpeed = 10;
+    m_frameSpeed = 9;
     m_currentFrame = 0;
     m_frameCounter = 0;
     m_currentState = S_IDEL;
@@ -25,25 +25,51 @@ Player::Player()
     char_sprites[S_STOPRUN].frameRec = { 0.0f, 0.0f, (float)char_sprites[S_STOPRUN].texture.width / 4,
         (float)char_sprites[S_STOPRUN].texture.height };
     char_sprites[S_STOPRUN].frameNum = 4;
+
+    char_sprites[S_RUN_UP].texture = LoadTexture("../assets/whereToGo_charactor_runup.png");
+    char_sprites[S_RUN_UP].frameRec = { 0.0f, 0.0f, (float)char_sprites[S_RUN_UP].texture.width / 9,
+        (float)char_sprites[S_RUN_UP].texture.height };
+    char_sprites[S_RUN_UP].frameNum = 9;
+
+    char_sprites[S_RUN_DOWN].texture = LoadTexture("../assets/whereToGo_charactor_rundown.png");
+    char_sprites[S_RUN_DOWN].frameRec = { 0.0f, 0.0f, (float)char_sprites[S_RUN_DOWN].texture.width / 9,
+        (float)char_sprites[S_RUN_DOWN].texture.height };
+    char_sprites[S_RUN_DOWN].frameNum = 9;
+
+    char_sprites[S_ATTACK1].texture = LoadTexture("../assets/whereToGo_charactor_attack1.png");
+    char_sprites[S_ATTACK1].frameRec = { 0.0f, 0.0f, (float)char_sprites[S_ATTACK1].texture.width / 5,
+        (float)char_sprites[S_ATTACK1].texture.height };
+    char_sprites[S_ATTACK1].frameNum = 5;
 }
 
 void Player::handle_keyboard()
 {
     frameRec = &char_sprites[m_currentState].frameRec;
     m_lastState = m_currentState;
-    if (IsKeyDown(KEY_R) || IsKeyDown(KEY_S) || IsKeyDown(KEY_W)) {
+    if (IsKeyDown(KEY_S)) {
         m_is_left = false;
         m_currentState = S_RUN;
     } else if (IsKeyDown(KEY_A)) {
         m_is_left = true;
         m_currentState = S_RUN;
+    } else if (IsKeyDown(KEY_W)) {
+        m_currentState = S_RUN_UP;
+    } else if (IsKeyDown(KEY_R)) {
+        m_currentState = S_RUN_DOWN;
+    } else if (IsKeyDown(KEY_N)) {
+        m_currentState = S_ATTACK1;
+        m_currentFrame = 0;
     } else if (m_lastState == S_STOPRUN && m_currentFrame != 3)
         m_currentState = S_STOPRUN;
+    else if (m_lastState == S_ATTACK1 && m_currentFrame != 4)
+        m_currentState = S_ATTACK1;
     else
         m_currentState = S_IDEL;
 
-    if (m_lastState == S_RUN && m_currentState == S_IDEL)
+    if (m_lastState == S_RUN && m_currentState == S_IDEL) {
         m_currentState = S_STOPRUN;
+        m_currentFrame = 0;
+    }
 };
 
 void Player::Render()
@@ -61,7 +87,7 @@ void Player::Render()
     }
 
     BeginDrawing();
-    ClearBackground(RAYWHITE);
+    ClearBackground(Color { 23, 32, 56 });
     DrawTexture(char_sprites[m_currentState].texture, 15, 40, WHITE);
     DrawRectangleLines(15, 40, char_sprites[m_currentState].texture.width,
         char_sprites[m_currentState].texture.height, LIME);

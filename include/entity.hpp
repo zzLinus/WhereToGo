@@ -12,6 +12,9 @@ public:
         S_IDEL = 0,
         S_RUN,
         S_STOPRUN,
+        S_RUN_UP,
+        S_RUN_DOWN,
+        S_ATTACK1,
     };
 
     int m_frameSpeed;
