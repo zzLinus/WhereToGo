@@ -3,18 +3,20 @@
 
 class Game {
 public:
-  Game() : SCREEN_WIDTH(800), SCREEN_HEIGHT(600){};
-  virtual ~Game() { delete player; };
-  void Render();
-  void InitEntity();
-  void Init();
+    Game()
+        : SCREEN_WIDTH(800)
+        , SCREEN_HEIGHT(600) {};
+    virtual ~Game() { delete player; };
+    void Render();
+    void InitEntity();
+    void Init();
 
 private:
 public:
-  // global const here
-  const int SCREEN_WIDTH;
-  const int SCREEN_HEIGHT;
+    // global const here
+    const int SCREEN_WIDTH;
+    const int SCREEN_HEIGHT;
 
 private:
-  Player *player;
+    Player* player;
 };
