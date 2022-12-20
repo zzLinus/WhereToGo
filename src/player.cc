@@ -40,6 +40,12 @@ Player::Player()
     char_sprites[S_ATTACK1].frameRec = { 0.0f, 0.0f, (float)char_sprites[S_ATTACK1].texture.width / 5,
         (float)char_sprites[S_ATTACK1].texture.height };
     char_sprites[S_ATTACK1].frameNum = 5;
+
+    char_weapon_blade[B_ATTACK1].texture = LoadTexture("../assets/whereToGo_charactor_weaponblade1.png");
+    char_weapon_blade[B_ATTACK1].frameRec
+        = { 0.0f, 0.0f, (float)char_weapon_blade[B_ATTACK1].texture.width / 5,
+              (float)char_weapon_blade[B_ATTACK1].texture.height };
+    char_weapon_blade[B_ATTACK1].frameNum = 5;
 }
 
 void Player::handle_keyboard()
@@ -84,6 +90,8 @@ void Player::Render()
             m_currentFrame = 0;
 
         frameRec->x = (float)m_currentFrame * (float)char_sprites[m_currentState].texture.width / tex_frames;
+        char_weapon_blade[B_ATTACK1].frameRec.x = (float)m_currentFrame
+            * (float)char_weapon_blade[B_ATTACK1].texture.width / char_weapon_blade[B_ATTACK1].frameNum;
     }
 
     BeginDrawing();
@@ -94,16 +102,37 @@ void Player::Render()
     DrawRectangleLines(
         15 + (int)frameRec->x, 40 + (int)frameRec->y, (int)frameRec->width, (int)frameRec->height, RED);
 
-    if (m_is_left)
+    if (m_is_left) {
         DrawTexturePro(char_sprites[m_currentState].texture,
             Rectangle {
                 .x = frameRec->x, .y = frameRec->y, .width = -frameRec->width, .height = frameRec->height },
             (Rectangle) { position.x, position.y, (float)frameRec->width * 3, (float)frameRec->height * 3 },
             (Vector2) { 0, 1 }, 0.0f, WHITE);
-    else
+        if (m_currentState == S_ATTACK1)
+            DrawTexturePro(char_weapon_blade[B_ATTACK1].texture,
+                Rectangle { .x = char_weapon_blade[B_ATTACK1].frameRec.x,
+                    .y = char_weapon_blade[B_ATTACK1].frameRec.y,
+                    .width = -char_weapon_blade[B_ATTACK1].frameRec.width,
+                    .height = char_weapon_blade[B_ATTACK1].frameRec.height },
+                Rectangle { position.x - 25.0f, position.y,
+                    (float)char_weapon_blade[B_ATTACK1].frameRec.width * 3,
+                    (float)char_weapon_blade[B_ATTACK1].frameRec.height * 3 },
+                Vector2 { 0, 1 }, 0.0f, WHITE);
+    } else {
         DrawTexturePro(char_sprites[m_currentState].texture, *frameRec,
             (Rectangle) { position.x, position.y, (float)frameRec->width * 3, (float)frameRec->height * 3 },
             (Vector2) { 0, 1 }, 0.0f, WHITE);
+        if (m_currentState == S_ATTACK1)
+            DrawTexturePro(char_weapon_blade[B_ATTACK1].texture,
+                Rectangle { .x = char_weapon_blade[B_ATTACK1].frameRec.x,
+                    .y = char_weapon_blade[B_ATTACK1].frameRec.y,
+                    .width = char_weapon_blade[B_ATTACK1].frameRec.width,
+                    .height = char_weapon_blade[B_ATTACK1].frameRec.height },
+                Rectangle { position.x + 25.0f, position.y,
+                    (float)char_weapon_blade[B_ATTACK1].frameRec.width * 3,
+                    (float)char_weapon_blade[B_ATTACK1].frameRec.height * 3 },
+                Vector2 { 0, 1 }, 0.0f, WHITE);
+    }
 
     EndDrawing();
 }
