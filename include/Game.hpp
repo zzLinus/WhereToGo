@@ -1,3 +1,4 @@
+#include "map.hpp"
 #include "player.hpp"
 #include <raylib.h>
 
@@ -6,7 +7,7 @@ public:
     Game()
         : SCREEN_WIDTH(800)
         , SCREEN_HEIGHT(600) {};
-    virtual ~Game() { delete player; };
+    virtual ~Game();
     void Render();
     void InitEntity();
     void Init();
@@ -19,4 +20,5 @@ public:
 
 private:
     Player* player;
+    Map* map;
 };

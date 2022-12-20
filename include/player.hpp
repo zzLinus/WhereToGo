@@ -21,6 +21,7 @@ public:
     Sprites char_weapon_blade[10];
     Sprites char_current_sprites;
     Sprites char_current_blade_sprites;
+    float speed;
     Vector2 position;
     Vector2 blade_offset[10];
     int char_tex_frames;

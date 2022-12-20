@@ -1,4 +1,5 @@
 #include "player.hpp"
+#include <raymath.h>
 #include <stdio.h>
 
 Player::Player()
@@ -7,6 +8,7 @@ Player::Player()
     m_frameSpeed = 9;
     m_currentFrame = 0;
     m_frameCounter = 0;
+    speed = 3.0f;
     char_current_sprites = char_sprites[0];
     char_current_blade_sprites = char_weapon_blade[0];
     m_current_weapon_state = B_ATTACK1;
@@ -17,6 +19,7 @@ Player::Player()
 
     position = { 350.0f, 280.0f };
 
+    // load sprites
     char_sprites[S_IDEL].texture = LoadTexture("./assets/whereToGo_charactor_idel.png");
     char_sprites[S_IDEL].frameRec = { 0.0f, 0.0f, (float)char_sprites[S_IDEL].texture.width / 4,
         (float)char_sprites[S_IDEL].texture.height };
@@ -97,32 +100,59 @@ void Player::handle_keyboard()
 {
     m_lastState = m_currentState;
 
-    if (IsKeyDown(KEY_N) && !is_player_attacking()) {
-        attack();
-    } else if (IsKeyDown(KEY_S) && !is_player_attacking()) {
-        m_is_left = false;
-        m_currentState = S_RUN;
-    } else if (IsKeyDown(KEY_A) && !is_player_attacking()) {
-        m_is_left = true;
-        m_currentState = S_RUN;
-    } else if (IsKeyDown(KEY_W) && !is_player_attacking()) {
-        m_currentState = S_RUN_UP;
-    } else if (IsKeyDown(KEY_R) && !is_player_attacking()) {
-        m_currentState = S_RUN_DOWN;
-    } else if (m_lastState == S_STOPRUN && m_currentFrame != 3)
+    Vector2 direction = { 0 };
+    if (IsKeyDown(KEY_S) && !is_player_attacking()) {
+        direction.x = 1.0f;
+    }
+    if (IsKeyDown(KEY_A) && !is_player_attacking()) {
+        direction.x = -1.0f;
+    }
+    if (IsKeyDown(KEY_W) && !is_player_attacking()) {
+        direction.y = -1.0f;
+    }
+    if (IsKeyDown(KEY_R) && !is_player_attacking()) {
+        direction.y = 1.0f;
+    }
+    position = Vector2Add(position,
+        Vector2Multiply(
+            Vector2Normalize(Vector2 { direction.x, direction.y }), Vector2 { .x = speed, .y = speed }));
+
+    if (!is_player_attacking()) {
+        if (direction.x > 0) {
+            m_currentState = S_RUN;
+            m_is_left = false;
+        } else if (direction.x < 0) {
+            m_currentState = S_RUN;
+            m_is_left = true;
+        } else if (direction.y >= 0) {
+            m_currentState = S_RUN_DOWN;
+        } else {
+            m_currentState = S_RUN_UP;
+        }
+    }
+
+    if (m_lastState == S_STOPRUN && m_currentFrame != 3) {
         m_currentState = S_STOPRUN;
-    else if (is_player_attacking()) {
-        if (m_currentState == S_ATTACK1_UP)
+    }
+    if (is_player_attacking()) {
+        if (m_currentState == S_ATTACK1_UP) {
+            printf("set ATTACK UP!!\n");
             m_currentState = S_ATTACK1_UP;
-        else
+        } else {
+            printf("set ATTACK!!\n");
             m_currentState = S_ATTACK1;
-    } else {
+        }
+    } else if (direction.x == 0 && direction.y == 0) {
         m_currentState = S_IDEL;
     }
 
     if (m_lastState == S_RUN && m_currentState == S_IDEL) {
         m_currentState = S_STOPRUN;
         m_currentFrame = 0;
+    }
+
+    if (IsKeyDown(KEY_N) && !is_player_attacking()) {
+        attack();
     }
 
     char_tex_frames = char_sprites[m_currentState].frameNum;
@@ -138,6 +168,7 @@ void Player::handle_keyboard()
 void Player::Render()
 {
     handle_keyboard();
+    printf("current strte : %d\n", m_currentState);
     m_frameCounter++;
     if (m_frameCounter >= (60 / m_frameSpeed)) {
         m_frameCounter = 0;
@@ -194,6 +225,5 @@ void Player::Render()
                 Vector2 { 0, 1 }, 0.0f, WHITE);
         }
     }
-
     EndDrawing();
 }
