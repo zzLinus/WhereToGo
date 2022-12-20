@@ -16,10 +16,14 @@ public:
     };
     Sprites char_sprites[10];
     Sprites char_weapon_blade[10];
+    Sprites char_current_sprites;
+    Sprites char_current_blade_sprites;
     Vector2 position;
-    int tex_frames;
+    int char_tex_frames;
+    int weapon_tex_frames;
     char_state m_currentState;
-    Rectangle* frameRec;
+    m_weapon_blade m_current_weapon_state;
+    Rectangle* frame_rec;
 
 private:
 };
