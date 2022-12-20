@@ -15,6 +15,7 @@ public:
         S_RUN_UP,
         S_RUN_DOWN,
         S_ATTACK1,
+        S_ATTACK1_UP,
     };
 
     int m_frameSpeed;
