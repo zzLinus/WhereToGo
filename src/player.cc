@@ -8,7 +8,7 @@ Player::Player()
     m_frameSpeed = 9;
     m_currentFrame = 0;
     m_frameCounter = 0;
-    speed = 3.0f;
+    speed = 5.0f;
     char_current_sprites = char_sprites[0];
     char_current_blade_sprites = char_weapon_blade[0];
     m_current_weapon_state = B_ATTACK1;
@@ -92,8 +92,6 @@ void Player::attack(void)
         m_currentFrame = 0;
         m_frameCounter = 0;
     }
-
-    printf("current frame : %d\n", m_currentFrame);
 };
 
 void Player::handle_keyboard()
@@ -183,11 +181,14 @@ void Player::Render()
 
     BeginDrawing();
     ClearBackground(Color { 23, 32, 56 });
+
+#ifdef DEBUG
     DrawTexture(char_sprites[m_currentState].texture, 15, 40, WHITE);
     DrawRectangleLines(15, 40, char_sprites[m_currentState].texture.width,
         char_sprites[m_currentState].texture.height, LIME);
     DrawRectangleLines(
         15 + (int)frame_rec->x, 40 + (int)frame_rec->y, (int)frame_rec->width, (int)frame_rec->height, RED);
+#endif
 
     if (m_is_left) {
         DrawTexturePro(char_sprites[m_currentState].texture,

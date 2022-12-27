@@ -3,6 +3,7 @@ project(WhereToGo)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDEBUG")
 
 # raylib
 find_package(raylib QUIET)
@@ -23,6 +24,7 @@ add_executable(${PROJECT_NAME} ${SRC_FILES})
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 14)
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 target_link_libraries(${PROJECT_NAME} PUBLIC raylib tmx)
+
 
 # Web Configurations
 if (${PLATFORM} STREQUAL "Web")
