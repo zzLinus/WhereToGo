@@ -17,6 +17,7 @@ public:
     // global const here
     const int SCREEN_WIDTH;
     const int SCREEN_HEIGHT;
+    TileMap* tm;
 
 private:
     Player* player;

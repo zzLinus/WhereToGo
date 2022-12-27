@@ -1,7 +1,5 @@
 #include "Game.hpp"
 
-Game::~Game() { delete player; };
-
 void Game::Init()
 {
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Where To Go");
@@ -15,9 +13,20 @@ void Game::Render()
     SetTargetFPS(60);
     while (!WindowShouldClose()) {
         BeginDrawing();
+        tm->Render();
         player->Render();
         EndDrawing();
     }
 }
 
-void Game::InitEntity() { player = new Player(); }
+void Game::InitEntity()
+{
+    tm = new TileMap();
+    player = new Player();
+}
+
+Game::~Game()
+{
+    delete player;
+    delete tm;
+};
