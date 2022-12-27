@@ -8,8 +8,9 @@ public:
     virtual ~Player() {};
     void Render(void) override;
     void handle_keyboard(void) override;
-    bool is_player_attacking(void);
     void attack(void);
+    bool load_assets(void);
+    bool is_player_attacking(void);
 
 private:
 public:

@@ -13,11 +13,11 @@ void Game::Init()
 void Game::Render()
 {
     SetTargetFPS(60);
-    BeginDrawing();
     while (!WindowShouldClose()) {
+        BeginDrawing();
         player->Render();
+        EndDrawing();
     }
-    EndDrawing();
 }
 
 void Game::InitEntity() { player = new Player(); }

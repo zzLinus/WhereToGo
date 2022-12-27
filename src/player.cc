@@ -1,4 +1,5 @@
 #include "player.hpp"
+#include <iostream>
 #include <raymath.h>
 #include <stdio.h>
 
@@ -17,58 +18,13 @@ Player::Player()
     m_currentState = S_IDEL;
     m_is_left = false;
 
+    if (load_assets()) {
+        std::cout << "Assets load successfully!\n";
+    } else {
+        std::cout << "Assets load Failed!\n";
+    }
+
     position = { 350.0f, 280.0f };
-
-    // load sprites
-    char_sprites[S_IDEL].texture = LoadTexture("./assets/whereToGo_charactor_idel.png");
-    char_sprites[S_IDEL].frameRec = { 0.0f, 0.0f, (float)char_sprites[S_IDEL].texture.width / 4,
-        (float)char_sprites[S_IDEL].texture.height };
-    char_sprites[S_IDEL].frameNum = 4;
-
-    char_sprites[S_RUN].texture = LoadTexture("./assets/whereToGo_charactor_run.png");
-    char_sprites[S_RUN].frameRec = { 0.0f, 0.0f, (float)char_sprites[S_RUN].texture.width / 7,
-        (float)char_sprites[S_RUN].texture.height };
-    char_sprites[S_RUN].frameNum = 7;
-
-    char_sprites[S_STOPRUN].texture = LoadTexture("./assets/whereToGo_charactor_stoprun.png");
-    char_sprites[S_STOPRUN].frameRec = { 0.0f, 0.0f, (float)char_sprites[S_STOPRUN].texture.width / 5,
-        (float)char_sprites[S_STOPRUN].texture.height };
-    char_sprites[S_STOPRUN].frameNum = 5;
-
-    char_sprites[S_RUN_UP].texture = LoadTexture("./assets/whereToGo_charactor_runup.png");
-    char_sprites[S_RUN_UP].frameRec = { 0.0f, 0.0f, (float)char_sprites[S_RUN_UP].texture.width / 9,
-        (float)char_sprites[S_RUN_UP].texture.height };
-    char_sprites[S_RUN_UP].frameNum = 9;
-
-    char_sprites[S_RUN_DOWN].texture = LoadTexture("./assets/whereToGo_charactor_rundown.png");
-    char_sprites[S_RUN_DOWN].frameRec = { 0.0f, 0.0f, (float)char_sprites[S_RUN_DOWN].texture.width / 9,
-        (float)char_sprites[S_RUN_DOWN].texture.height };
-    char_sprites[S_RUN_DOWN].frameNum = 9;
-
-    char_sprites[S_ATTACK1].texture = LoadTexture("./assets/whereToGo_charactor_attack1.png");
-    char_sprites[S_ATTACK1].frameRec = { 0.0f, 0.0f, (float)char_sprites[S_ATTACK1].texture.width / 6,
-        (float)char_sprites[S_ATTACK1].texture.height };
-    char_sprites[S_ATTACK1].frameNum = 6;
-
-    char_weapon_blade[B_ATTACK1].texture = LoadTexture("./assets/whereToGo_charactor_weaponblade1.png");
-    char_weapon_blade[B_ATTACK1].frameRec
-        = { 0.0f, 0.0f, (float)char_weapon_blade[B_ATTACK1].texture.width / 5,
-              (float)char_weapon_blade[B_ATTACK1].texture.height };
-    char_weapon_blade[B_ATTACK1].frameNum = 5;
-
-    char_sprites[S_ATTACK1_UP].texture = LoadTexture("./assets/whereToGo_charactor_attackup1.png");
-    char_sprites[S_ATTACK1_UP].frameRec = { 0.0f, 0.0f, (float)char_sprites[S_ATTACK1_UP].texture.width / 6,
-        (float)char_sprites[S_ATTACK1_UP].texture.height };
-    char_sprites[S_ATTACK1_UP].frameNum = 6;
-
-    char_weapon_blade[B_ATTACK1_UP].texture = LoadTexture("./assets/whereToGo_charactor_weaponblade2.png");
-    char_weapon_blade[B_ATTACK1_UP].frameRec
-        = { 0.0f, 0.0f, (float)char_weapon_blade[B_ATTACK1_UP].texture.width / 5,
-              (float)char_weapon_blade[B_ATTACK1_UP].texture.height };
-    char_weapon_blade[B_ATTACK1_UP].frameNum = 5;
-
-    blade_offset[S_ATTACK1] = Vector2 { .x = 25.0f, .y = 0.0f };
-    blade_offset[S_ATTACK1_UP] = Vector2 { .x = 0.0f, .y = -50.0f };
 }
 
 bool Player::is_player_attacking()
@@ -84,13 +40,9 @@ void Player::attack(void)
     if (IsKeyDown(KEY_W)) {
         m_currentState = S_ATTACK1_UP;
         m_current_weapon_state = B_ATTACK1_UP;
-        m_currentFrame = 0;
-        m_frameCounter = 0;
     } else {
         m_currentState = S_ATTACK1;
         m_current_weapon_state = B_ATTACK1;
-        m_currentFrame = 0;
-        m_frameCounter = 0;
     }
 };
 
@@ -129,15 +81,10 @@ void Player::handle_keyboard()
         }
     }
 
-    if (m_lastState == S_STOPRUN && m_currentFrame != 3) {
-        m_currentState = S_STOPRUN;
-    }
     if (is_player_attacking()) {
         if (m_currentState == S_ATTACK1_UP) {
-            printf("set ATTACK UP!!\n");
             m_currentState = S_ATTACK1_UP;
         } else {
-            printf("set ATTACK!!\n");
             m_currentState = S_ATTACK1;
         }
     } else if (direction.x == 0 && direction.y == 0) {
@@ -147,6 +94,10 @@ void Player::handle_keyboard()
     if (m_lastState == S_RUN && m_currentState == S_IDEL) {
         m_currentState = S_STOPRUN;
         m_currentFrame = 0;
+    }
+
+    if (m_lastState == S_STOPRUN && m_currentFrame != 3) {
+        m_currentState = S_STOPRUN;
     }
 
     if (IsKeyDown(KEY_N) && !is_player_attacking()) {
@@ -159,27 +110,31 @@ void Player::handle_keyboard()
     char_current_blade_sprites = char_weapon_blade[m_current_weapon_state];
 
     frame_rec = &char_sprites[m_currentState].frameRec;
-    if (m_lastState != m_currentState)
-        char_sprites[m_lastState].frameRec.x = 0;
+    if (m_lastState != m_currentState) {
+        m_currentFrame = 0;
+        m_frameCounter = 0;
+        frame_rec->x = 0.0f;
+    }
 };
 
 void Player::Render()
 {
     handle_keyboard();
-    printf("current strte : %d\n", m_currentState);
     m_frameCounter++;
     if (m_frameCounter >= (60 / m_frameSpeed)) {
         m_frameCounter = 0;
         m_currentFrame++;
-        if (m_currentFrame > char_sprites[m_currentState].frameNum - 1)
+        if (m_currentFrame > char_sprites[m_currentState].frameNum - 1 && m_currentState != S_ATTACK1) {
             m_currentFrame = 0;
+        } else if (m_currentFrame > char_sprites[m_currentState].frameNum) {
+            m_currentFrame = 0;
+        }
 
         frame_rec->x = (float)m_currentFrame * (float)char_current_sprites.texture.width / char_tex_frames;
         char_weapon_blade[m_current_weapon_state].frameRec.x
             = (float)m_currentFrame * (float)char_current_blade_sprites.texture.width / weapon_tex_frames;
     }
 
-    BeginDrawing();
     ClearBackground(Color { 23, 32, 56 });
 
 #ifdef DEBUG
@@ -226,5 +181,59 @@ void Player::Render()
                 Vector2 { 0, 1 }, 0.0f, WHITE);
         }
     }
-    EndDrawing();
+}
+
+bool Player::load_assets()
+{
+    // load sprites
+    char_sprites[S_IDEL].texture = LoadTexture("./assets/whereToGo_charactor_idel.png");
+    char_sprites[S_IDEL].frameRec = { 0.0f, 0.0f, (float)char_sprites[S_IDEL].texture.width / 4,
+        (float)char_sprites[S_IDEL].texture.height };
+    char_sprites[S_IDEL].frameNum = 4;
+
+    char_sprites[S_RUN].texture = LoadTexture("./assets/whereToGo_charactor_run.png");
+    char_sprites[S_RUN].frameRec = { 0.0f, 0.0f, (float)char_sprites[S_RUN].texture.width / 7,
+        (float)char_sprites[S_RUN].texture.height };
+    char_sprites[S_RUN].frameNum = 7;
+
+    char_sprites[S_STOPRUN].texture = LoadTexture("./assets/whereToGo_charactor_stoprun.png");
+    char_sprites[S_STOPRUN].frameRec = { 0.0f, 0.0f, (float)char_sprites[S_STOPRUN].texture.width / 5,
+        (float)char_sprites[S_STOPRUN].texture.height };
+    char_sprites[S_STOPRUN].frameNum = 5;
+
+    char_sprites[S_RUN_UP].texture = LoadTexture("./assets/whereToGo_charactor_runup.png");
+    char_sprites[S_RUN_UP].frameRec = { 0.0f, 0.0f, (float)char_sprites[S_RUN_UP].texture.width / 9,
+        (float)char_sprites[S_RUN_UP].texture.height };
+    char_sprites[S_RUN_UP].frameNum = 9;
+
+    char_sprites[S_RUN_DOWN].texture = LoadTexture("./assets/whereToGo_charactor_rundown.png");
+    char_sprites[S_RUN_DOWN].frameRec = { 0.0f, 0.0f, (float)char_sprites[S_RUN_DOWN].texture.width / 9,
+        (float)char_sprites[S_RUN_DOWN].texture.height };
+    char_sprites[S_RUN_DOWN].frameNum = 9;
+
+    char_sprites[S_ATTACK1].texture = LoadTexture("./assets/whereToGo_charactor_attack1.png");
+    char_sprites[S_ATTACK1].frameRec = { 0.0f, 0.0f, (float)char_sprites[S_ATTACK1].texture.width / 5,
+        (float)char_sprites[S_ATTACK1].texture.height };
+    char_sprites[S_ATTACK1].frameNum = 5;
+
+    char_weapon_blade[B_ATTACK1].texture = LoadTexture("./assets/whereToGo_charactor_weaponblade1.png");
+    char_weapon_blade[B_ATTACK1].frameRec
+        = { 0.0f, 0.0f, (float)char_weapon_blade[B_ATTACK1].texture.width / 5,
+              (float)char_weapon_blade[B_ATTACK1].texture.height };
+    char_weapon_blade[B_ATTACK1].frameNum = 5;
+
+    char_sprites[S_ATTACK1_UP].texture = LoadTexture("./assets/whereToGo_charactor_attackup1.png");
+    char_sprites[S_ATTACK1_UP].frameRec = { 0.0f, 0.0f, (float)char_sprites[S_ATTACK1_UP].texture.width / 5,
+        (float)char_sprites[S_ATTACK1_UP].texture.height };
+    char_sprites[S_ATTACK1_UP].frameNum = 5;
+
+    char_weapon_blade[B_ATTACK1_UP].texture = LoadTexture("./assets/whereToGo_charactor_weaponblade2.png");
+    char_weapon_blade[B_ATTACK1_UP].frameRec
+        = { 0.0f, 0.0f, (float)char_weapon_blade[B_ATTACK1_UP].texture.width / 5,
+              (float)char_weapon_blade[B_ATTACK1_UP].texture.height };
+    char_weapon_blade[B_ATTACK1_UP].frameNum = 5;
+
+    blade_offset[S_ATTACK1] = Vector2 { .x = 25.0f, .y = 0.0f };
+    blade_offset[S_ATTACK1_UP] = Vector2 { .x = 0.0f, .y = -50.0f };
+    return true;
 }
