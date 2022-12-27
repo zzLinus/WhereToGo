@@ -1,0 +1,3 @@
+[submodule "3rdParty/raylib-tileson"]
+	path = 3rdParty/raylib-tileson
+	url = git@github.com:RobLoach/raylib-tileson.git
