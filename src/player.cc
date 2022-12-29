@@ -46,9 +46,11 @@ void Player::attack(void)
 void Player::handle_keyboard()
 {
     m_lastState = m_curState;
+#ifdef DEBUG
     if (IsKeyPressed(KEY_D)) {
         m_showDebug = !m_showDebug;
     }
+#endif
 
     Vector2 direction = { 0 };
     if (IsKeyDown(KEY_S) && !is_player_attacking()) {
