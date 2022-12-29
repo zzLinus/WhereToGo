@@ -117,7 +117,7 @@ void Player::handle_keyboard()
     }
 };
 
-void Player::Render()
+void Player::update()
 {
     handle_keyboard();
     m_frameCounter++;
@@ -134,9 +134,10 @@ void Player::Render()
         char_weapon_blade[m_current_weapon_state].frameRec.x
             = (float)m_currentFrame * (float)char_current_blade_sprites.texture.width / weapon_tex_frames;
     }
+}
 
-    ClearBackground(Color { 23, 32, 56 });
-
+void Player::RenderMenu()
+{
 #ifdef DEBUG
     DrawTexture(char_sprites[m_currentState].texture, 15, 40, WHITE);
     DrawRectangleLines(15, 40, char_sprites[m_currentState].texture.width,
@@ -144,6 +145,11 @@ void Player::Render()
     DrawRectangleLines(
         15 + (int)frame_rec->x, 40 + (int)frame_rec->y, (int)frame_rec->width, (int)frame_rec->height, RED);
 #endif
+}
+
+void Player::Render()
+{
+    ClearBackground(Color { 23, 32, 56 });
 
     if (m_is_left) {
         DrawTexturePro(char_sprites[m_currentState].texture,

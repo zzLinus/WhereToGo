@@ -1,12 +1,12 @@
+#include "cam.hpp"
 #include "map.hpp"
 #include "player.hpp"
 #include <raylib.h>
+#include <raymath.h>
 
 class Game {
 public:
-    Game()
-        : SCREEN_WIDTH(800)
-        , SCREEN_HEIGHT(600) {};
+    Game();
     virtual ~Game();
     void Render();
     void InitEntity();
@@ -15,10 +15,10 @@ public:
 private:
 public:
     // global const here
-    const int SCREEN_WIDTH;
-    const int SCREEN_HEIGHT;
-    TileMap* tm;
 
 private:
     Player* player;
+    TileMap* tm;
+    Cam* cam;
+    float deltaTime;
 };

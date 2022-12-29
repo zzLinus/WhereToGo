@@ -1,3 +1,5 @@
+#pragma once
+
 #include "entity.hpp"
 #include "types.hpp"
 #include <raylib.h>
@@ -6,7 +8,9 @@ class Player : public Entity {
 public:
     Player();
     virtual ~Player() {};
+    void update();
     void Render(void) override;
+    void RenderMenu(void);
     void handle_keyboard(void) override;
     void attack(void);
     bool load_assets(void);
