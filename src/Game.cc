@@ -1,16 +1,21 @@
 #include "Game.hpp"
 
-Game::Game() { }
+Game::Game()
+    : cam(nullptr)
+    , tm(nullptr)
+    , ecs(nullptr)
+{
+}
 
 void Game::Init()
 {
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Where To Go");
-    // Load the texture after calling InitWindow. Textures require a valid OpenGL
-    // context.
+    // NOTE: Load the texture after calling InitWindow. Textures require a valid OpenGL context.
+
     InitEntity();
 }
 
-void Game::Render()
+void Game::Run()
 {
     SetTargetFPS(60);
     while (!WindowShouldClose()) {
@@ -18,12 +23,15 @@ void Game::Render()
         cam->UpdateCamera(*player, deltaTime, SCREEN_WIDTH, SCREEN_HEIGHT);
         BeginDrawing();
 
-        player->update();
+        ecs->update_movers();
+
+        // render world && player with camera2D cordinate
         BeginMode2D(cam->cam);
         tm->Render();
-        player->Render();
+        ecs->render_movers();
         EndMode2D();
-        player->RenderMenu();
+
+        player->render_hud();
 
         EndDrawing();
     }
@@ -33,12 +41,13 @@ void Game::InitEntity()
 {
     cam = new Cam();
     tm = new TileMap();
-    player = new Player();
+    ecs = new Ecs();
+    player = ecs->get_player();
 }
 
 Game::~Game()
 {
-    delete player;
     delete tm;
     delete cam;
+    delete ecs;
 };

@@ -8,6 +8,7 @@ public:
     TileMap();
     virtual ~TileMap();
     void Render(void);
+    bool check_collision();
 
 public:
     Map* map;

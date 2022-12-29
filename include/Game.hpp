@@ -1,6 +1,6 @@
 #include "cam.hpp"
+#include "esc.hpp"
 #include "map.hpp"
-#include "player.hpp"
 #include <raylib.h>
 #include <raymath.h>
 
@@ -8,7 +8,7 @@ class Game {
 public:
     Game();
     virtual ~Game();
-    void Render();
+    void Run();
     void InitEntity();
     void Init();
 
@@ -17,8 +17,9 @@ public:
     // global const here
 
 private:
-    Player* player;
     TileMap* tm;
     Cam* cam;
     float deltaTime;
+    Ecs* ecs;
+    Mover* player;
 };

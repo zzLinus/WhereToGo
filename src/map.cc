@@ -12,3 +12,9 @@ TileMap::~TileMap()
 }
 
 void TileMap::Render(void) { DrawTiled(*map, 0, 0, WHITE); }
+
+bool TileMap::check_collision()
+{
+    for (;;) { }
+    return false;
+}

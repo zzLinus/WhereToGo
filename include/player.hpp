@@ -1,16 +1,16 @@
 #pragma once
 
-#include "entity.hpp"
+#include "mover.hpp"
 #include "types.hpp"
 #include <raylib.h>
 
-class Player : public Entity {
+class Player : public Mover {
 public:
     Player();
     virtual ~Player() {};
-    void update();
+    void update() override;
     void Render(void) override;
-    void RenderMenu(void);
+    void render_hud(void) override;
     void handle_keyboard(void) override;
     void attack(void);
     bool load_assets(void);
@@ -20,20 +20,27 @@ private:
 public:
     enum m_weapon_blade {
         B_ATTACK1 = 0,
-        B_ATTACK1_UP,
     };
-    Sprites char_sprites[10];
-    Sprites char_weapon_blade[10];
-    Sprites char_current_sprites;
-    Sprites char_current_blade_sprites;
-    float speed;
-    Vector2 position;
-    Vector2 blade_offset[10];
-    int char_tex_frames;
-    int weapon_tex_frames;
-    char_state m_currentState;
-    m_weapon_blade m_current_weapon_state;
-    Rectangle* frame_rec;
+    Sprite m_sprites[10];
+    Sprite m_weaponSprites[10];
+    Sprite m_curSprite;
+    Sprite m_curWSprite;
+    float m_speed;
+    Vector2 m_bladeOffset[10];
+    // TODO: create a animation texture class for these mess
+    int m_ctf; // charactor texture frames
+    int m_wtf; // weapon texture frames
+    char_state m_curState;
+    m_weapon_blade m_curWeaponState;
+    Rectangle* m_frameRec;
+    int m_frameSpeed;
+    int m_currentFrame;
+    int m_frameCounter;
+    bool m_isLeft;
+    char_state m_lastState;
+#ifdef DEBUG
+    bool m_showDebug;
+#endif
 
 private:
 };

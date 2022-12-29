@@ -6,7 +6,7 @@ class Cam {
 public:
     Cam();
     virtual ~Cam();
-    void UpdateCamera(Player& player, float delta, int width, int height);
+    void UpdateCamera(Mover& player, float delta, int width, int height);
 
 public:
     Camera2D cam;
