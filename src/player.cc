@@ -117,6 +117,10 @@ void Player::handle_keyboard()
 
 void Player::update()
 {
+    m_collisonBox.x = m_position.x;
+    m_collisonBox.y = m_position.y;
+    m_collisonBox.width = (float)m_curSprite.texture.width / m_ctf;
+    m_collisonBox.height = m_curSprite.texture.height;
     handle_keyboard();
     m_frameCounter++;
     if (m_frameCounter >= (60 / m_frameSpeed)) {
@@ -228,5 +232,6 @@ bool Player::load_assets()
     m_weaponSprites[B_ATTACK1].frameNum = 5;
 
     m_bladeOffset[S_ATTACK1] = Vector2 { .x = 10.0f, .y = 0.0f };
+
     return true;
 }

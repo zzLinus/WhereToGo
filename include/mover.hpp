@@ -24,6 +24,7 @@ public:
     };
     std::string m_name;
     Vector2 m_position;
+    Rectangle m_collisonBox;
 
 private:
 };

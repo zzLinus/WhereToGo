@@ -1,4 +1,5 @@
 #include "Game.hpp"
+#include <iostream>
 
 Game::Game()
     : cam(nullptr)
@@ -29,6 +30,7 @@ void Game::Run()
         BeginMode2D(cam->cam);
         tm->Render();
         ecs->render_movers();
+        std::cout << CheckCollision(tm->map, &player->m_collisonBox) << "\n";
         EndMode2D();
 
         player->render_hud();
