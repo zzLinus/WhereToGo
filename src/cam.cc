@@ -4,7 +4,7 @@ Cam::Cam()
 {
     cam = { 0 };
     cam.rotation = 0.0f;
-    cam.zoom = 2.0f;
+    cam.zoom = 3.0f;
 }
 Cam::~Cam() { }
 

@@ -30,7 +30,14 @@ void Game::Run()
         BeginMode2D(cam->cam);
         tm->Render();
         ecs->render_movers();
-        std::cout << CheckCollision(tm->map, &player->m_collisonBox) << "\n";
+#ifdef DEBUG
+        if (CheckCollision(tm->map, &player->m_collisonBox, true))
+            DrawText("Collision : True", player->m_position.x, player->m_position.y - 10, 10, RED);
+        else
+            DrawText("Collision : False", player->m_position.x, player->m_position.y - 10, 10, GREEN);
+#else
+        CheckCollision(tm->map, &player->m_collisonBox);
+#endif
         EndMode2D();
 
         player->render_hud();

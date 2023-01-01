@@ -6,10 +6,10 @@
 Player::Player()
     : Mover("player")
     , m_frameRec(nullptr)
-    , m_frameSpeed(8)
+    , m_frameSpeed(11)
     , m_currentFrame(0)
     , m_frameCounter(0)
-    , m_speed(2.0f)
+    , m_speed(1.0f)
     , m_ctf(0)
     , m_wtf(0)
     , m_curWeaponState(B_ATTACK1)
@@ -24,9 +24,6 @@ Player::Player()
     } else {
         TraceLog(LOG_WARNING, "Assets load Failed!\n");
     }
-#ifdef DEBUG
-    m_showDebug = true;
-#endif
 }
 
 bool Player::is_player_attacking()
@@ -46,11 +43,6 @@ void Player::attack(void)
 void Player::handle_keyboard()
 {
     m_lastState = m_curState;
-#ifdef DEBUG
-    if (IsKeyPressed(KEY_D)) {
-        m_showDebug = !m_showDebug;
-    }
-#endif
 
     Vector2 direction = { 0 };
     if (IsKeyDown(KEY_S) && !is_player_attacking()) {
@@ -87,15 +79,6 @@ void Player::handle_keyboard()
         m_curState = S_ATTACK1;
     } else if (direction.x == 0 && direction.y == 0) {
         m_curState = S_IDEL;
-    }
-
-    if (m_lastState == S_RUN && m_curState == S_IDEL) {
-        m_curState = S_STOPRUN;
-        m_currentFrame = 0;
-    }
-
-    if (m_lastState == S_STOPRUN && m_currentFrame != 3) {
-        m_curState = S_STOPRUN;
     }
 
     if (IsKeyDown(KEY_N) && !is_player_attacking()) {
@@ -141,15 +124,13 @@ void Player::update()
 void Player::render_hud()
 {
 #ifdef DEBUG // render debug info
-    if (m_showDebug) {
-        DrawFPS(SCREEN_WIDTH - 100, 10);
-        DrawText("Debug INFO", 15, 20, 10, RAYWHITE);
-        DrawTexture(m_sprites[m_curState].texture, 15, 40, WHITE);
-        DrawRectangleLines(
-            15, 40, m_sprites[m_curState].texture.width, m_sprites[m_curState].texture.height, LIME);
-        DrawRectangleLines(15 + (int)m_frameRec->x, 40 + (int)m_frameRec->y, (int)m_frameRec->width,
-            (int)m_frameRec->height, RED);
-    }
+    DrawFPS(SCREEN_WIDTH - 100, 10);
+    DrawText("Debug INFO", 15, 20, 10, RAYWHITE);
+    DrawTexture(m_sprites[m_curState].texture, 15, 40, WHITE);
+    DrawRectangleLines(
+        15, 40, m_sprites[m_curState].texture.width, m_sprites[m_curState].texture.height, LIME);
+    DrawRectangleLines(15 + (int)m_frameRec->x, 40 + (int)m_frameRec->y, (int)m_frameRec->width,
+        (int)m_frameRec->height, RED);
 #endif
 }
 
@@ -201,25 +182,25 @@ bool Player::load_assets()
         = { 0.0f, 0.0f, (float)m_sprites[S_IDEL].texture.width / 4, (float)m_sprites[S_IDEL].texture.height };
     m_sprites[S_IDEL].frameNum = 4;
 
-    m_sprites[S_RUN].texture = LoadTexture("./assets/whereToGo_charactor_run.png");
+    m_sprites[S_RUN].texture = LoadTexture("./assets/wheretogo_charactor_run.png");
     m_sprites[S_RUN].frameRec
-        = { 0.0f, 0.0f, (float)m_sprites[S_RUN].texture.width / 7, (float)m_sprites[S_RUN].texture.height };
-    m_sprites[S_RUN].frameNum = 7;
+        = { 0.0f, 0.0f, (float)m_sprites[S_RUN].texture.width / 6, (float)m_sprites[S_RUN].texture.height };
+    m_sprites[S_RUN].frameNum = 6;
 
     m_sprites[S_STOPRUN].texture = LoadTexture("./assets/whereToGo_charactor_stoprun.png");
     m_sprites[S_STOPRUN].frameRec = { 0.0f, 0.0f, (float)m_sprites[S_STOPRUN].texture.width / 5,
         (float)m_sprites[S_STOPRUN].texture.height };
     m_sprites[S_STOPRUN].frameNum = 5;
 
-    m_sprites[S_RUN_UP].texture = LoadTexture("./assets/whereToGo_charactor_runup.png");
-    m_sprites[S_RUN_UP].frameRec = { 0.0f, 0.0f, (float)m_sprites[S_RUN_UP].texture.width / 9,
+    m_sprites[S_RUN_UP].texture = LoadTexture("./assets/wheretogo_charactor_runup.png");
+    m_sprites[S_RUN_UP].frameRec = { 0.0f, 0.0f, (float)m_sprites[S_RUN_UP].texture.width / 6,
         (float)m_sprites[S_RUN_UP].texture.height };
-    m_sprites[S_RUN_UP].frameNum = 9;
+    m_sprites[S_RUN_UP].frameNum = 6;
 
-    m_sprites[S_RUN_DOWN].texture = LoadTexture("./assets/whereToGo_charactor_rundown.png");
-    m_sprites[S_RUN_DOWN].frameRec = { 0.0f, 0.0f, (float)m_sprites[S_RUN_DOWN].texture.width / 9,
+    m_sprites[S_RUN_DOWN].texture = LoadTexture("./assets/wheretogo_charactor_rundown.png");
+    m_sprites[S_RUN_DOWN].frameRec = { 0.0f, 0.0f, (float)m_sprites[S_RUN_DOWN].texture.width / 6,
         (float)m_sprites[S_RUN_DOWN].texture.height };
-    m_sprites[S_RUN_DOWN].frameNum = 9;
+    m_sprites[S_RUN_DOWN].frameNum = 6;
 
     m_sprites[S_ATTACK1].texture = LoadTexture("./assets/whereToGo_charactor_attack1.png");
     m_sprites[S_ATTACK1].frameRec = { 0.0f, 0.0f, (float)m_sprites[S_ATTACK1].texture.width / 5,

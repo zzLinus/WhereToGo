@@ -38,9 +38,6 @@ public:
     int m_frameCounter;
     bool m_isLeft;
     char_state m_lastState;
-#ifdef DEBUG
-    bool m_showDebug;
-#endif
 
 private:
 };
