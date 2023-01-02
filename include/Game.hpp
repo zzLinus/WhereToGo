@@ -2,6 +2,7 @@
 #include "esc.hpp"
 #include "map.hpp"
 #include "utils.hpp"
+#include <raygui.h>
 #include <raylib.h>
 #include <raymath.h>
 
