@@ -1,6 +1,8 @@
 #include "Game.hpp"
 #include <iostream>
 
+DebugInfo debugInfo = DebugInfo::disable;
+
 Game::Game()
     : cam(nullptr)
     , tm(nullptr)
@@ -31,12 +33,14 @@ void Game::Run()
         tm->Render();
         ecs->render_movers();
 #ifdef DEBUG
-        if (CheckCollision(tm->map, &player->m_collisonBox, true))
-            DrawText("Collision : True", player->m_position.x, player->m_position.y - 10, 10, RED);
-        else
-            DrawText("Collision : False", player->m_position.x, player->m_position.y - 10, 10, GREEN);
+        if ((bool)debugInfo) {
+            if (CheckCollision(tm->map, &player->m_collisonBox, true))
+                DrawText("Collision : True", player->m_position.x, player->m_position.y - 10, 10, RED);
+            else
+                DrawText("Collision : False", player->m_position.x, player->m_position.y - 10, 10, GREEN);
+        }
 #else
-        CheckCollision(tm->map, &player->m_collisonBox);
+        CheckCollision(tm->map, &player->m_collisonBox, false);
 #endif
         EndMode2D();
 

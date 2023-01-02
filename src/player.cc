@@ -1,7 +1,10 @@
 #include "player.hpp"
+#include "utils.hpp"
 #include <iostream>
 #include <raymath.h>
 #include <stdio.h>
+
+extern DebugInfo debugInfo;
 
 Player::Player()
     : Mover("player")
@@ -43,6 +46,9 @@ void Player::attack(void)
 void Player::handle_keyboard()
 {
     m_lastState = m_curState;
+    if (IsKeyPressed(KEY_D)) {
+        debugInfo = debugInfo == DebugInfo::enable ? DebugInfo::disable : DebugInfo::enable;
+    }
 
     Vector2 direction = { 0 };
     if (IsKeyDown(KEY_S) && !is_player_attacking()) {
@@ -124,13 +130,15 @@ void Player::update()
 void Player::render_hud()
 {
 #ifdef DEBUG // render debug info
-    DrawFPS(SCREEN_WIDTH - 100, 10);
-    DrawText("Debug INFO", 15, 20, 10, RAYWHITE);
-    DrawTexture(m_sprites[m_curState].texture, 15, 40, WHITE);
-    DrawRectangleLines(
-        15, 40, m_sprites[m_curState].texture.width, m_sprites[m_curState].texture.height, LIME);
-    DrawRectangleLines(15 + (int)m_frameRec->x, 40 + (int)m_frameRec->y, (int)m_frameRec->width,
-        (int)m_frameRec->height, RED);
+    if (debugInfo == DebugInfo::enable) {
+        DrawFPS(SCREEN_WIDTH - 100, 10);
+        DrawText("Debug INFO", 15, 20, 10, RAYWHITE);
+        DrawTexture(m_sprites[m_curState].texture, 15, 40, WHITE);
+        DrawRectangleLines(
+            15, 40, m_sprites[m_curState].texture.width, m_sprites[m_curState].texture.height, LIME);
+        DrawRectangleLines(15 + (int)m_frameRec->x, 40 + (int)m_frameRec->y, (int)m_frameRec->width,
+            (int)m_frameRec->height, RED);
+    }
 #endif
 }
 

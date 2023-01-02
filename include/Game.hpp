@@ -1,6 +1,7 @@
 #include "cam.hpp"
 #include "esc.hpp"
 #include "map.hpp"
+#include "utils.hpp"
 #include <raylib.h>
 #include <raymath.h>
 
