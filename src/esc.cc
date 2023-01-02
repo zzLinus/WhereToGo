@@ -1,13 +1,19 @@
 #include "esc.hpp"
 
 Ecs::Ecs() { init_entity(); }
-Ecs::~Ecs() { }
+Ecs::~Ecs()
+{
+    for (auto& m : movers) {
+        delete m;
+    }
+}
 
 inline void Ecs::add_movers(Mover* m) { movers.push_back(m); }
 
 void Ecs::init_entity(void)
 {
-    Player* p = new Player();
+    // TODO: get spwon point from .tmx map file
+    Player* p = new Player(Vector2 { 300.0f, 280.0f });
     add_movers(p);
 }
 

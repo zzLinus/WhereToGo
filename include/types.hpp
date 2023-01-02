@@ -5,6 +5,5 @@ const int SCREEN_HEIGHT = 600;
 
 struct Sprite {
     Texture texture;
-    Rectangle frameRec;
     int frameNum;
 };

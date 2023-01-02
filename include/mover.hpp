@@ -4,7 +4,7 @@
 
 class Mover {
 public:
-    Mover(std::string name);
+    Mover(std::string name, Vector2 spownPoint);
     virtual ~Mover();
     virtual void update();
     virtual void Render();
@@ -13,18 +13,10 @@ public:
 
 private:
 public:
-    enum char_state {
-        S_IDEL = 0,
-        S_RUN,
-        S_STOPRUN,
-        S_RUN_UP,
-        S_RUN_DOWN,
-        S_ATTACK1,
-        S_ATTACK1_UP,
-    };
+    std::string m_curState;
     std::string m_name;
     Vector2 m_position;
-    Rectangle m_collisonBox;
+    Rectangle m_collisionBox;
 
 private:
 };

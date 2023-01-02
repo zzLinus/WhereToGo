@@ -1,9 +1,9 @@
 #include "mover.hpp"
 
-Mover::Mover(std::string name)
+Mover::Mover(std::string name, Vector2 spownPoint)
     : m_name(name)
-    , m_position(Vector2 { 350.0f, 280.0f })
-    , m_collisonBox(Rectangle { .x = m_position.x, .y = m_position.y, .width = 50, .height = 100 })
+    , m_position(spownPoint)
+    , m_collisionBox(Rectangle { .x = m_position.x, .y = m_position.y, .width = 50, .height = 100 })
 {
 }
 Mover::~Mover() { }

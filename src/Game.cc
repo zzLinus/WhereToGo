@@ -1,7 +1,11 @@
 #include "Game.hpp"
 #include <iostream>
 
+#ifdef DEBUG
+DebugInfo debugInfo = DebugInfo::enable;
+#else
 DebugInfo debugInfo = DebugInfo::disable;
+#endif
 
 Game::Game()
     : cam(nullptr)
@@ -34,7 +38,7 @@ void Game::Run()
         ecs->render_movers();
 #ifdef DEBUG
         if ((bool)debugInfo) {
-            if (CheckCollision(tm->map, &player->m_collisonBox, true))
+            if (CheckCollision(tm->map, &player->m_collisionBox, true))
                 DrawText("Collision : True", player->m_position.x, player->m_position.y - 10, 10, RED);
             else
                 DrawText("Collision : False", player->m_position.x, player->m_position.y - 10, 10, GREEN);
