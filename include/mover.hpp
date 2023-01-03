@@ -1,10 +1,11 @@
 #pragma once
+#include <Renderer.hpp>
 #include <raylib.h>
 #include <string>
 
 class Mover {
 public:
-    Mover(std::string name, Vector2 spownPoint);
+    Mover(std::string name, Vector2 spownPoint, Renderer* renderer);
     virtual ~Mover();
     virtual void update();
     virtual void Render();
@@ -17,6 +18,7 @@ public:
     std::string m_name;
     Vector2 m_position;
     Rectangle m_collisionBox;
+    Renderer* p_renderer;
 
 private:
 };

@@ -1,15 +1,16 @@
 #pragma once
 
+#include "Renderer.hpp"
 #include "anim-sprite.hpp"
 #include "mover.hpp"
-#include "types.hpp"
+
 #include <raylib.h>
 #include <unordered_map>
 
 class Player : public Mover {
 public:
     Player();
-    Player(Vector2 spownPoint);
+    Player(Vector2 spownPoint, Renderer* renderer);
     virtual ~Player() {};
     void update() override;
     void Render(void) override;
@@ -24,13 +25,12 @@ public:
     std::unordered_map<std::string, AnimSprite> m_animSprites;
     std::unordered_map<std::string, AnimSprite> m_weaponBladeSprites;
     std::unordered_map<std::string, Vector2> m_bladeOffset; // NOTE: blade && bollete spawn point
-    float m_speed;
 
-    // TODO: create a animation texture class for these mess
     std::string m_curState;
     std::string m_curWeaponState;
-    bool m_isLeft;
     std::string m_lastState;
+    float m_speed;
+    bool m_isLeft;
 
 private:
 };

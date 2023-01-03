@@ -7,7 +7,7 @@
 extern DebugInfo debugInfo;
 
 Player::Player()
-    : Mover("player", Vector2 { 0.0f, 0.0f })
+    : Mover("player", Vector2 { 0.0f, 0.0f }, nullptr)
     , m_speed(1.0f)
     , m_curWeaponState("attack1")
     , m_curState("idel")
@@ -21,8 +21,8 @@ Player::Player()
     }
 }
 
-Player::Player(Vector2 spownPoint)
-    : Mover("player", Vector2 { 0.0f, 0.0f })
+Player::Player(Vector2 spownPoint, Renderer* renderer)
+    : Mover("player", Vector2 { 0.0f, 0.0f }, renderer)
     , m_speed(1.0f)
     , m_curWeaponState("attack1")
     , m_curState("idel")
@@ -107,32 +107,48 @@ void Player::handle_keyboard()
 
 void Player::update()
 {
+    handle_keyboard();
     m_collisionBox.x = m_position.x
         + (float)m_animSprites[m_curState].m_sprite.texture.width
             / (2 * (float)m_animSprites[m_curState].m_sprite.frameNum)
-        - 8;
-    m_collisionBox.y = m_position.y + (float)m_animSprites[m_curState].m_sprite.texture.height - 8;
-    m_collisionBox.width = 16;
-    m_collisionBox.height = 8;
+        - 7;
+    m_collisionBox.y = m_position.y + (float)m_animSprites[m_curState].m_sprite.texture.height - 6;
+    m_collisionBox.width = 14;
+    m_collisionBox.height = 6;
     m_animSprites[m_curState].update_framerect();
     if (!m_curState.compare("attack1"))
         m_weaponBladeSprites[m_curWeaponState].update_framerect();
-    handle_keyboard();
 }
 
 void Player::render_hud()
 {
-#ifdef DEBUG // render debug info
+#ifdef DEBUG // NOTE :render debug info
     if (debugInfo == DebugInfo::enable) {
         DrawFPS(SCREEN_WIDTH - 100, 10);
-        DrawText("Debug INFO", 15, 20, 10, RAYWHITE);
-        DrawTexture(m_animSprites[m_curState].m_sprite.texture, 15, 40, WHITE);
-        DrawRectangleLines(15, 40, m_animSprites[m_curState].m_sprite.texture.width,
-            m_animSprites[m_curState].m_sprite.texture.height, LIME);
-        DrawRectangleLines(15 + (int)m_animSprites[m_curState].m_frameRect.x,
+
+        RenderObject* rdobj;
+
+        rdobj = new RenderObject((char*)"Debug INFO", 15, 20, 20, RAYWHITE, TEXT);
+        p_renderer->add_renderObj(rdobj);
+        delete rdobj;
+
+        rdobj = new RenderObject(m_animSprites[m_curState].m_sprite.texture, 15, 40, WHITE, TEXTURE);
+        p_renderer->add_renderObj(rdobj);
+        delete rdobj;
+
+        rdobj = new RenderObject(15, 40, m_animSprites[m_curState].m_sprite.texture.width,
+            m_animSprites[m_curState].m_sprite.texture.height, LIME, RECTLINE);
+        p_renderer->add_renderObj(rdobj);
+        delete rdobj;
+
+        rdobj = new RenderObject(15 + (int)m_animSprites[m_curState].m_frameRect.x,
             40 + (int)m_animSprites[m_curState].m_frameRect.y,
             (int)m_animSprites[m_curState].m_frameRect.width,
-            (int)m_animSprites[m_curState].m_frameRect.height, RED);
+            (int)m_animSprites[m_curState].m_frameRect.height, RED, RECTLINE);
+        p_renderer->add_renderObj(rdobj);
+        delete rdobj;
+
+        p_renderer->Render();
     }
 #endif
 }

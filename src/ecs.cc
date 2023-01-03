@@ -2,23 +2,25 @@
 extern bool debugInfo;
 
 Ecs::Ecs()
-    : tm(nullptr)
-    , cam(nullptr)
+    : p_tm(nullptr)
+    , p_cam(nullptr)
     , deltaTime(0)
 {
-    tm = new TileMap();
-    cam = new Cam();
-    player = new Player(Vector2 { 300.0f, 280.0f });
-    add_movers(player);
-    tm->get_collisionRects();
+    p_tm = new TileMap();
+    p_cam = new Cam();
+    p_renderer = new Renderer();
+    p_player = new Player(Vector2 { 300.0f, 280.0f }, p_renderer);
+    add_movers(p_player);
+    p_tm->get_collisionRects();
 }
 Ecs::~Ecs()
 {
     for (auto& m : movers) {
         delete m;
     }
-    delete tm;
-    delete cam;
+    delete p_tm;
+    delete p_cam;
+    delete p_renderer;
 }
 
 inline void Ecs::add_movers(Mover* m) { movers.push_back(m); }
@@ -39,18 +41,18 @@ void Ecs::update_movers(void)
     }
 }
 
-void Ecs::render_map() { tm->Render(); }
+void Ecs::render_map() { p_tm->Render(); }
 
-void Ecs::render_hud(void) { player->render_hud(); }
+void Ecs::render_hud(void) { p_player->render_hud(); }
 
-void Ecs::update_cam() { cam->UpdateCamera(*player, deltaTime, SCREEN_WIDTH, SCREEN_HEIGHT); }
+void Ecs::update_cam() { p_cam->UpdateCamera(*p_player, deltaTime, SCREEN_WIDTH, SCREEN_HEIGHT); }
 
 void Ecs::render_component(void)
 {
-    BeginMode2D(cam->cam);
+    BeginMode2D(p_cam->cam);
     render_map();
     render_movers();
-    tm->check_collision(player->m_collisionBox);
+    p_tm->check_collision(p_player->m_collisionBox);
     EndMode2D();
 
     render_hud();

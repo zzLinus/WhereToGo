@@ -21,7 +21,7 @@ public:
 
 public:
     Map* map;
-    std::map<std::string, std::vector<Rectangle>> collisions;
+    std::map<std::string, std::vector<Rectangle>> m_collisionBoxs;
 
 private:
     /* data */

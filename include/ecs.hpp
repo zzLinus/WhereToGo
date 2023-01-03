@@ -3,6 +3,7 @@
 #include "mover.hpp"
 #include "player.hpp"
 #include "types.hpp"
+#include <Renderer.hpp>
 #include <vector>
 
 class Ecs {
@@ -26,9 +27,10 @@ private:
     void update_deltaTime(float dt);
 
 public:
-    TileMap* tm;
-    Player* player;
-    Cam* cam;
+    TileMap* p_tm;
+    Player* p_player;
+    Cam* p_cam;
+    Renderer* p_renderer;
 
 private:
     float deltaTime;

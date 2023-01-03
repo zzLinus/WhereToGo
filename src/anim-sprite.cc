@@ -48,6 +48,6 @@ void AnimSprite::render(Vector2 position, bool invert)
 
     DrawTexturePro(m_sprite.texture,
         Rectangle { .x = m_frameRect.x, .y = m_frameRect.y, .width = w, .height = m_frameRect.height },
-        (Rectangle) { position.x, position.y, (float)m_frameRect.width, (float)m_frameRect.height },
+        Rectangle { position.x, position.y, (float)m_frameRect.width, (float)m_frameRect.height },
         (Vector2) { 0, 1 }, 0.0f, WHITE);
 }

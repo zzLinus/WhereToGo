@@ -19,9 +19,8 @@ void TileMap::Render(void) { DrawTiled(*map, 0, 0, WHITE); }
 
 bool TileMap::check_collision(Rectangle& rect)
 {
-    // WARN : what the fuck is happening here
     bool is_colli = false;
-    for (auto& [name, colli_vect] : collisions) {
+    for (auto& [name, colli_vect] : m_collisionBoxs) {
         for (auto& colli : colli_vect) {
             if ((bool)debugInfo)
                 DrawRectangleRec(colli, Color { 255, 255, 255, 100 });
@@ -31,12 +30,14 @@ bool TileMap::check_collision(Rectangle& rect)
         }
     }
 
+#ifdef DEBUG
     if ((bool)debugInfo) {
         if (is_colli)
             DrawRectangleLinesEx(rect, 1, Color { 230, 41, 55, 100 });
         else
             DrawRectangleLinesEx(rect, 1, Color { 0, 121, 241, 100 });
     }
+#endif
 
     return false;
 }
@@ -55,7 +56,7 @@ void TileMap::get_collisionRects()
                     tson::Rect objRect
                         = Rect(obj.getPosition().x, obj.getPosition().y, obj.getSize().x, obj.getSize().y);
                     Rectangle worldRect = RectangleFromTiledRectangle(objRect);
-                    collisions[obj.getName()].push_back(worldRect);
+                    m_collisionBoxs[obj.getName()].push_back(worldRect);
                 }
             }
         }
