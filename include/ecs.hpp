@@ -15,6 +15,7 @@ public:
     Mover* get_player(void);
     std::vector<Mover*> movers;
 
+    // TODO: move collison physics here
 private:
     void render_map(void);
     void render_movers(void);

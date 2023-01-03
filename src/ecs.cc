@@ -33,28 +33,12 @@ void Ecs::update_deltaTime(float dt) { deltaTime = dt; }
 
 void Ecs::update_movers(void)
 {
-    for (auto e : movers) {
-        e->update();
+    for (auto m : movers) {
+        m->update();
     }
 }
 
-void Ecs::render_map()
-{
-    tm->Render();
-#ifdef DEBUG
-    // TODO: Implement collision may be make a map store each type of collison object and
-    if ((bool)debugInfo) {
-        // TODO: if draw text above player using player.position will glitch because text only draw using
-        // int value
-        if (CheckCollision(tm->map, &player->m_collisionBox, true))
-            DrawText("Collision : True", player->m_position.x, player->m_position.y - 10, 10, RED);
-        else
-            DrawText("Collision : False", player->m_position.x, player->m_position.y - 10, 10, GREEN);
-    }
-#else
-    CheckCollision(tm->map, &player->m_collisonBox, false);
-#endif
-}
+void Ecs::render_map() { tm->Render(); }
 
 void Ecs::render_hud(void) { player->render_hud(); }
 
@@ -65,6 +49,20 @@ void Ecs::render_component(void)
     BeginMode2D(cam->cam);
     render_map();
     render_movers();
+#ifdef DEBUG
+    // TODO : Implement collision may be make a map store each type of collison object and
+    if ((bool)debugInfo) {
+        // WARNING : if draw text above player using player.position will glitch because text only draw using
+        // int value
+
+        if (tm->get_collisionRects(player->m_collisionBox))
+            DrawText("Collision : True", player->m_position.x, player->m_position.y - 10, 10, RED);
+        else
+            DrawText("Collision : False", player->m_position.x, player->m_position.y - 10, 10, GREEN);
+    }
+#else
+    CheckCollision(tm->map, &player->m_collisonBox, false);
+#endif
     EndMode2D();
 
     render_hud();
