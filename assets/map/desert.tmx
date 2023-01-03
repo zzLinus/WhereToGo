@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="94" nextobjectid="91">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="95" nextobjectid="94">
  <editorsettings>
   <export target="desert.json" format="json"/>
  </editorsettings>
@@ -187,7 +187,7 @@
    <image source="grass3.png" width="16" height="16"/>
   </imagelayer>
  </group>
- <objectgroup id="5" name="mapcollision">
+ <objectgroup id="5" name="mapcollision" visible="0">
   <object id="18" name="collision" x="160.724" y="330.467" width="3.09094" height="46.5206"/>
   <object id="19" name="collision" x="244.383" y="391.195" width="40.4716" height="5.37873"/>
   <object id="21" name="collision" x="328.044" y="282.013" width="2.0985" height="113.669"/>
@@ -202,22 +202,23 @@
   <object id="52" name="collision" x="195.818" y="403.272" width="13.8535" height="11.8017"/>
   <object id="53" name="collision" x="285.037" y="390.22" width="43.5625" height="5.46964"/>
  </objectgroup>
- <objectgroup id="75" name="tree">
+ <objectgroup id="75" name="tree" visible="0">
   <object id="55" name="tree" x="165.696" y="324.478" width="17.1739" height="5.30435"/>
   <object id="57" name="tree" x="260.375" y="343.125" width="10.875" height="5.875"/>
   <object id="58" name="tree" x="226.625" y="282.875" width="17" height="3.5"/>
   <object id="59" name="tree" x="313" y="284" width="14.125" height="4.875"/>
   <object id="60" name="tree" x="317" y="384.375" width="9.25" height="4.75"/>
  </objectgroup>
- <objectgroup id="76" name="lamp">
+ <objectgroup id="76" name="lamp" visible="0">
   <object id="62" name="lamp" x="197.182" y="378.455" width="10.4545" height="5"/>
   <object id="63" name="lamp" x="253.818" y="381.636" width="9.81818" height="5"/>
+  <object id="93" name="lamp" x="225.091" y="282.364" width="10.3636" height="4.72727"/>
  </objectgroup>
  <objectgroup id="77" name="grass&amp;rocks">
   <object id="65" name="g-r" x="171.875" y="361.188" width="3.0625" height="1.75"/>
   <object id="68" name="g-r" x="183.813" y="338.625" width="8.5" height="4.25"/>
   <object id="69" name="g-r" x="202.375" y="338.75" width="6" height="2.4375"/>
-  <object id="71" x="245.022" y="377.178" width="2.11111" height="0.888889"/>
+  <object id="71" name="g-r" x="245.022" y="377.178" width="2.11111" height="0.888889"/>
   <object id="72" name="g-r" x="287.356" y="360.044" width="7.2" height="1.2"/>
   <object id="74" name="g-r" x="307.978" y="368.089" width="5.37778" height="2.53333"/>
   <object id="79" name="g-r" x="298.063" y="323.313" width="7.6875" height="4.3125"/>

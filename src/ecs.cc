@@ -10,6 +10,7 @@ Ecs::Ecs()
     cam = new Cam();
     player = new Player(Vector2 { 300.0f, 280.0f });
     add_movers(player);
+    tm->get_collisionRects();
 }
 Ecs::~Ecs()
 {
@@ -49,20 +50,7 @@ void Ecs::render_component(void)
     BeginMode2D(cam->cam);
     render_map();
     render_movers();
-#ifdef DEBUG
-    // TODO : Implement collision may be make a map store each type of collison object and
-    if ((bool)debugInfo) {
-        // WARNING : if draw text above player using player.position will glitch because text only draw using
-        // int value
-
-        if (tm->get_collisionRects(player->m_collisionBox))
-            DrawText("Collision : True", player->m_position.x, player->m_position.y - 10, 10, RED);
-        else
-            DrawText("Collision : False", player->m_position.x, player->m_position.y - 10, 10, GREEN);
-    }
-#else
-    CheckCollision(tm->map, &player->m_collisonBox, false);
-#endif
+    tm->check_collision(player->m_collisionBox);
     EndMode2D();
 
     render_hud();

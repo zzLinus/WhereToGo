@@ -17,43 +17,46 @@ TileMap::~TileMap()
 
 void TileMap::Render(void) { DrawTiled(*map, 0, 0, WHITE); }
 
-bool TileMap::check_collision()
+bool TileMap::check_collision(Rectangle& rect)
 {
-    for (;;) { }
+    // WARN : what the fuck is happening here
+    bool is_colli = false;
+    for (auto& [name, colli_vect] : collisions) {
+        for (auto& colli : colli_vect) {
+            DrawRectangleRec(colli, WHITE);
+            if (CheckCollisionRecs(rect, colli)) {
+                is_colli = true;
+            }
+        }
+    }
+
+    if (is_colli)
+        DrawRectangleLinesEx(rect, 1, RED);
+    else
+        DrawRectangleLinesEx(rect, 1, BLUE);
+
     return false;
 }
 
-bool TileMap::get_collisionRects(Rectangle& rect)
+void TileMap::get_collisionRects()
 {
     // TODO: add collison detect function
     //
     RaylibTilesonData* data = (RaylibTilesonData*)map->data;
     tson::Map* tsonMap = data->map;
     auto& layers = tsonMap->getLayers();
-    bool is_colli = false;
     for (auto& layer : layers) {
         if (layer.getType() == tson::LayerType::ObjectGroup) {
-            auto* map = layer.getMap();
             for (auto& obj : layer.getObjects()) {
                 if (obj.getObjectType() == tson::ObjectType::Rectangle) {
                     tson::Rect objRect
                         = Rect(obj.getPosition().x, obj.getPosition().y, obj.getSize().x, obj.getSize().y);
                     Rectangle worldRect = RectangleFromTiledRectangle(objRect);
-#ifdef DEBUG
-                    if ((bool)debugInfo == true) {
-                        DrawRectangleRec(worldRect, Color { 255, 255, 255, 100 });
-                        DrawRectangleLinesEx(rect, 1, Color { 0, 0, 255, 20 });
-                    }
-#endif
-                    if (CheckCollisionRecs(worldRect, rect))
-                        is_colli = true;
-                    // break;
+                    collisions[obj.getName()].push_back(worldRect);
                 }
             }
-            // break;
         }
     }
-    return is_colli;
 }
 
 Rectangle TileMap::RectangleFromTiledRectangle(tson::Rect rect)
