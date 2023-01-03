@@ -1,8 +1,5 @@
-#include "cam.hpp"
-#include "esc.hpp"
-#include "map.hpp"
+#include "ecs.hpp"
 #include "utils.hpp"
-#include <raygui.h>
 #include <raylib.h>
 #include <raymath.h>
 
@@ -19,9 +16,6 @@ public:
     // global const here
 
 private:
-    TileMap* tm;
-    Cam* cam;
     float deltaTime;
     Ecs* ecs;
-    Mover* player;
 };

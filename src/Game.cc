@@ -8,9 +8,7 @@ DebugInfo debugInfo = DebugInfo::disable;
 #endif
 
 Game::Game()
-    : cam(nullptr)
-    , tm(nullptr)
-    , ecs(nullptr)
+    : ecs(nullptr)
 {
 }
 
@@ -26,45 +24,16 @@ void Game::Run()
 {
     SetTargetFPS(60);
     while (!WindowShouldClose()) {
-        deltaTime = GetFrameTime();
-        cam->UpdateCamera(*player, deltaTime, SCREEN_WIDTH, SCREEN_HEIGHT);
+        ecs->update_component();
         BeginDrawing();
 
-        ecs->update_movers();
-
-        // render world && player with camera2D cordinate
-        BeginMode2D(cam->cam);
-        tm->Render();
-        ecs->render_movers();
-#ifdef DEBUG
-        if ((bool)debugInfo) {
-            if (CheckCollision(tm->map, &player->m_collisionBox, true))
-                DrawText("Collision : True", player->m_position.x, player->m_position.y - 10, 10, RED);
-            else
-                DrawText("Collision : False", player->m_position.x, player->m_position.y - 10, 10, GREEN);
-        }
-#else
-        CheckCollision(tm->map, &player->m_collisonBox, false);
-#endif
-        EndMode2D();
-
-        player->render_hud();
+        // render map && player with camera2D cordinate
+        ecs->render_component();
 
         EndDrawing();
     }
 }
 
-void Game::InitEntity()
-{
-    cam = new Cam();
-    tm = new TileMap();
-    ecs = new Ecs();
-    player = ecs->get_player();
-}
+void Game::InitEntity() { ecs = new Ecs(); }
 
-Game::~Game()
-{
-    delete tm;
-    delete cam;
-    delete ecs;
-};
+Game::~Game() { delete ecs; };

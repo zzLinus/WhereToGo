@@ -14,7 +14,6 @@ Player::Player()
     , m_lastState("idel")
     , m_isLeft(false)
 {
-
     if (load_assets()) {
         TraceLog(LOG_INFO, "Assets load successfully!\n");
     } else {
@@ -143,6 +142,8 @@ void Player::Render()
     ClearBackground(Color { 0, 0, 0 });
 
     // NOTE: clean up these bunch of shit here
+    //       may be make a render funciton in the anim-sprite class
+    //       instead of copying these frameRect everywhere
     if (m_isLeft) {
         DrawTexturePro(m_animSprites[m_curState].m_sprite.texture,
             Rectangle { .x = m_animSprites[m_curState].m_frameRect.x,

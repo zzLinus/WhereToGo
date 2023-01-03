@@ -1,4 +1,5 @@
 #include "map.hpp"
+using tson::RaylibTilesonData;
 
 TileMap::TileMap()
 {
