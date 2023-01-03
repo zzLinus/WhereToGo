@@ -120,7 +120,7 @@ void Player::update()
         m_weaponBladeSprites[m_curWeaponState].update_framerect();
 }
 
-void Player::render_hud()
+void Player::upload_hud_drawobj()
 {
 #ifdef DEBUG // NOTE :render debug info
     if (debugInfo == DebugInfo::enable) {
@@ -129,35 +129,33 @@ void Player::render_hud()
         RenderObject* rdobj;
 
         rdobj = new RenderObject((char*)"Debug INFO", 15, 20, 20, RAYWHITE, TEXT);
-        p_renderer->add_renderObj(rdobj);
+        p_renderer->add_renderObj(rdobj, RENDER_NOR);
         delete rdobj;
 
         rdobj = new RenderObject(m_animSprites[m_curState].m_sprite.texture, 15, 40, WHITE, TEXTURE);
-        p_renderer->add_renderObj(rdobj);
+        p_renderer->add_renderObj(rdobj, RENDER_NOR);
         delete rdobj;
 
         rdobj = new RenderObject(15, 40, m_animSprites[m_curState].m_sprite.texture.width,
             m_animSprites[m_curState].m_sprite.texture.height, LIME, RECTLINE);
-        p_renderer->add_renderObj(rdobj);
+        p_renderer->add_renderObj(rdobj, RENDER_NOR);
         delete rdobj;
 
         rdobj = new RenderObject(15 + (int)m_animSprites[m_curState].m_frameRect.x,
             40 + (int)m_animSprites[m_curState].m_frameRect.y,
             (int)m_animSprites[m_curState].m_frameRect.width,
             (int)m_animSprites[m_curState].m_frameRect.height, RED, RECTLINE);
-        p_renderer->add_renderObj(rdobj);
+        p_renderer->add_renderObj(rdobj, RENDER_NOR);
         delete rdobj;
-
-        p_renderer->Render();
     }
 #endif
 }
 
-void Player::Render()
+void Player::upload_drawable()
 {
     ClearBackground(Color { 0, 0, 0 });
 
-    m_animSprites[m_curState].render(m_position, m_isLeft);
+    m_animSprites[m_curState].upload_drawable(m_position, m_isLeft);
     Vector2 tmpVect2;
     if (m_isLeft)
         tmpVect2 = Vector2Add(m_position,
@@ -165,7 +163,8 @@ void Player::Render()
     else
         tmpVect2 = Vector2Add(m_position, m_bladeOffset[m_curWeaponState]);
 
-    m_weaponBladeSprites[m_curWeaponState].render(tmpVect2, m_isLeft);
+    m_weaponBladeSprites[m_curWeaponState].upload_drawable(tmpVect2, m_isLeft);
+    upload_hud_drawobj();
 }
 
 bool Player::load_assets()

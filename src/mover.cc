@@ -11,8 +11,8 @@ Mover::~Mover() { }
 
 void Mover::update() { }
 
-void Mover::Render() { }
+void Mover::upload_drawable() { }
 
 void Mover::handle_keyboard() { }
 
-void Mover::render_hud(void) { }
+void Mover::upload_hud_drawobj(void) { }

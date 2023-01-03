@@ -1,3 +1,4 @@
+#include "Renderer.hpp"
 #include "types.hpp"
 #include <raylib.h>
 #include <string>
@@ -9,7 +10,7 @@ public:
     virtual ~AnimSprite();
     void update_framerect();
     void anim_finished_callback();
-    void render(Vector2 position, bool invert);
+    void upload_drawable(Vector2 position, bool invert);
 
 public:
     Sprite m_sprite;
@@ -18,6 +19,8 @@ public:
     int m_frameCounter;
     int m_curFrame;
     bool m_isFinished;
+
+    static Renderer* p_renderer;
 
 private:
     /* data */

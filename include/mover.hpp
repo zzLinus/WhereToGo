@@ -8,9 +8,9 @@ public:
     Mover(std::string name, Vector2 spownPoint, Renderer* renderer);
     virtual ~Mover();
     virtual void update();
-    virtual void Render();
+    virtual void upload_drawable();
     virtual void handle_keyboard();
-    virtual void render_hud(void);
+    virtual void upload_hud_drawobj(void);
 
 private:
 public:

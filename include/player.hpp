@@ -13,8 +13,8 @@ public:
     Player(Vector2 spownPoint, Renderer* renderer);
     virtual ~Player() {};
     void update() override;
-    void Render(void) override;
-    void render_hud(void) override;
+    void upload_drawable(void) override;
+    void upload_hud_drawobj(void) override;
     void handle_keyboard(void) override;
     void attack(void);
     bool load_assets(void);
