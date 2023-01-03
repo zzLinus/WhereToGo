@@ -141,51 +141,15 @@ void Player::Render()
 {
     ClearBackground(Color { 0, 0, 0 });
 
-    // NOTE: clean up these bunch of shit here
-    //       may be make a render funciton in the anim-sprite class
-    //       instead of copying these frameRect everywhere
-    if (m_isLeft) {
-        DrawTexturePro(m_animSprites[m_curState].m_sprite.texture,
-            Rectangle { .x = m_animSprites[m_curState].m_frameRect.x,
-                .y = m_animSprites[m_curState].m_frameRect.y,
-                .width = -m_animSprites[m_curState].m_frameRect.width,
-                .height = m_animSprites[m_curState].m_frameRect.height },
-            (Rectangle) { m_position.x, m_position.y, (float)m_animSprites[m_curState].m_frameRect.width,
-                (float)m_animSprites[m_curState].m_frameRect.height },
-            (Vector2) { 0, 1 }, 0.0f, WHITE);
-        if (is_player_attacking())
-            DrawTexturePro(m_weaponBladeSprites[m_curWeaponState].m_sprite.texture,
-                Rectangle { .x = m_weaponBladeSprites[m_curWeaponState].m_frameRect.x,
-                    .y = m_weaponBladeSprites[m_curWeaponState].m_frameRect.y,
-                    .width = -m_weaponBladeSprites[m_curWeaponState].m_frameRect.width,
-                    .height = m_weaponBladeSprites[m_curWeaponState].m_frameRect.height },
-                Rectangle { m_position.x - m_bladeOffset[m_curWeaponState].x,
-                    m_position.y + m_bladeOffset[m_curWeaponState].y,
-                    (float)m_weaponBladeSprites[m_curWeaponState].m_frameRect.width,
-                    (float)m_weaponBladeSprites[m_curWeaponState].m_frameRect.height },
-                Vector2 { 0, 1 }, 0.0f, WHITE);
-    } else {
-        DrawTexturePro(m_animSprites[m_curState].m_sprite.texture,
-            Rectangle { .x = m_animSprites[m_curState].m_frameRect.x,
-                .y = m_animSprites[m_curState].m_frameRect.y,
-                .width = m_animSprites[m_curState].m_frameRect.width,
-                .height = m_animSprites[m_curState].m_frameRect.height },
-            (Rectangle) { m_position.x, m_position.y, (float)m_animSprites[m_curState].m_frameRect.width,
-                (float)m_animSprites[m_curState].m_frameRect.height },
-            (Vector2) { 0, 1 }, 0.0f, WHITE);
-        if (is_player_attacking()) {
-            DrawTexturePro(m_weaponBladeSprites[m_curWeaponState].m_sprite.texture,
-                Rectangle { .x = m_weaponBladeSprites[m_curWeaponState].m_frameRect.x,
-                    .y = m_weaponBladeSprites[m_curWeaponState].m_frameRect.y,
-                    .width = m_weaponBladeSprites[m_curWeaponState].m_frameRect.width,
-                    .height = m_weaponBladeSprites[m_curWeaponState].m_frameRect.height },
-                Rectangle { m_position.x + m_bladeOffset[m_curWeaponState].x,
-                    m_position.y + m_bladeOffset[m_curWeaponState].y,
-                    (float)m_weaponBladeSprites[m_curWeaponState].m_frameRect.width,
-                    (float)m_weaponBladeSprites[m_curWeaponState].m_frameRect.height },
-                Vector2 { 0, 1 }, 0.0f, WHITE);
-        }
-    }
+    m_animSprites[m_curState].render(m_position, m_isLeft);
+    Vector2 tmpVect2;
+    if (m_isLeft)
+        tmpVect2 = Vector2Add(m_position,
+            Vector2 { .x = -m_bladeOffset[m_curWeaponState].x, .y = m_bladeOffset[m_curWeaponState].y });
+    else
+        tmpVect2 = Vector2Add(m_position, m_bladeOffset[m_curWeaponState]);
+
+    m_weaponBladeSprites[m_curWeaponState].render(tmpVect2, m_isLeft);
 }
 
 bool Player::load_assets()

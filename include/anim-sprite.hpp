@@ -9,6 +9,7 @@ public:
     virtual ~AnimSprite();
     void update_framerect();
     void anim_finished_callback();
+    void render(Vector2 position, bool invert);
 
 public:
     Sprite m_sprite;

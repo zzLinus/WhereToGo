@@ -37,3 +37,17 @@ void AnimSprite::update_framerect()
 }
 
 void AnimSprite::anim_finished_callback() { m_isFinished = false; }
+
+void AnimSprite::render(Vector2 position, bool invert)
+{
+    float w;
+    if (invert)
+        w = -m_frameRect.width;
+    else
+        w = m_frameRect.width;
+
+    DrawTexturePro(m_sprite.texture,
+        Rectangle { .x = m_frameRect.x, .y = m_frameRect.y, .width = w, .height = m_frameRect.height },
+        (Rectangle) { position.x, position.y, (float)m_frameRect.width, (float)m_frameRect.height },
+        (Vector2) { 0, 1 }, 0.0f, WHITE);
+}
