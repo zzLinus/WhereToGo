@@ -23,17 +23,20 @@ bool TileMap::check_collision(Rectangle& rect)
     bool is_colli = false;
     for (auto& [name, colli_vect] : collisions) {
         for (auto& colli : colli_vect) {
-            DrawRectangleRec(colli, WHITE);
+            if ((bool)debugInfo)
+                DrawRectangleRec(colli, Color { 255, 255, 255, 100 });
             if (CheckCollisionRecs(rect, colli)) {
                 is_colli = true;
             }
         }
     }
 
-    if (is_colli)
-        DrawRectangleLinesEx(rect, 1, RED);
-    else
-        DrawRectangleLinesEx(rect, 1, BLUE);
+    if ((bool)debugInfo) {
+        if (is_colli)
+            DrawRectangleLinesEx(rect, 1, Color { 230, 41, 55, 100 });
+        else
+            DrawRectangleLinesEx(rect, 1, Color { 0, 121, 241, 100 });
+    }
 
     return false;
 }

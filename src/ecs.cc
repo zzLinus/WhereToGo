@@ -59,6 +59,6 @@ void Ecs::render_component(void)
 void Ecs::update_component()
 {
     update_deltaTime(GetFrameTime());
-    update_cam();
     update_movers();
+    update_cam();
 }

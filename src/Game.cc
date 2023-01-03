@@ -27,7 +27,7 @@ void Game::Run()
         ecs->update_component();
         BeginDrawing();
 
-        // render map && player with camera2D cordinate
+        // render && player with camera2D cordinate
         ecs->render_component();
 
         EndDrawing();

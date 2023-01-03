@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="95" nextobjectid="94">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="96" nextobjectid="94">
  <editorsettings>
   <export target="desert.json" format="json"/>
  </editorsettings>
  <group id="78" name="base">
-  <imagelayer id="79" name="base_rock" offsetx="112.061" offsety="255.667">
+  <imagelayer id="79" name="base_rock" offsetx="112" offsety="256">
    <image source="baserocks.png" width="233" height="227"/>
   </imagelayer>
  </group>
@@ -21,7 +21,7 @@
   <imagelayer id="59" name="rocks1" offsetx="244.182" offsety="303.091">
    <image source="rocks1.png" width="16" height="16"/>
   </imagelayer>
-  <imagelayer id="65" name="rocks1的副本" offsetx="304.909" offsety="279.091">
+  <imagelayer id="65" name="rocks1的副本" offsetx="305" offsety="277">
    <image source="rocks1.png" width="16" height="16"/>
   </imagelayer>
   <imagelayer id="66" name="rocks2" offsetx="284.364" offsety="289.455">
@@ -141,13 +141,13 @@
   </imagelayer>
  </group>
  <group id="90" name="tree">
-  <imagelayer id="15" name="tree" offsetx="302.25" offsety="228.25">
+  <imagelayer id="15" name="tree" offsetx="303" offsety="225">
    <image source="tree.png" width="48" height="61"/>
   </imagelayer>
   <imagelayer id="21" name="tree1" offsetx="254.424" offsety="315.697">
    <image source="tree2.png" width="25" height="33"/>
   </imagelayer>
-  <imagelayer id="19" name="tree4" offsetx="224.75" offsety="268.25">
+  <imagelayer id="19" name="tree4" offsetx="225" offsety="268">
    <image source="tree1.png" width="32" height="18"/>
   </imagelayer>
   <imagelayer id="20" name="tree4的副本" offsetx="305.5" offsety="370.5">
@@ -158,7 +158,7 @@
   </imagelayer>
  </group>
  <group id="91" name="grass-upper-tree">
-  <imagelayer id="58" name="grass的副本" offsetx="318.795" offsety="278.045">
+  <imagelayer id="58" name="grass的副本" offsetx="315" offsety="278">
    <image source="grass1.png" width="16" height="16"/>
   </imagelayer>
   <imagelayer id="56" name="grass4的副本" offsetx="252.909" offsety="338.182">
@@ -172,7 +172,7 @@
   <imagelayer id="30" name="lanter" offsetx="241.136" offsety="356.045">
    <image source="streatlamp.png" width="28" height="31"/>
   </imagelayer>
-  <imagelayer id="31" name="lanter2" offsetx="216" offsety="253.273">
+  <imagelayer id="31" name="lanter2" offsetx="215" offsety="253">
    <image source="steatlamp3.png" width="23" height="34"/>
   </imagelayer>
   <imagelayer id="32" name="lanter3" offsetx="193.864" offsety="348.409">
@@ -180,7 +180,7 @@
   </imagelayer>
  </group>
  <group id="93" name="grass-upper-lamp">
-  <imagelayer id="52" name="grass4的副本" offsetx="216" offsety="276.182">
+  <imagelayer id="52" name="grass4的副本" offsetx="214.773" offsety="277.453">
    <image source="grass3.png" width="16" height="16"/>
   </imagelayer>
   <imagelayer id="48" name="grass2的副本" offsetx="191.966" offsety="372.716">

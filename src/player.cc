@@ -65,16 +65,16 @@ void Player::handle_keyboard()
 
     Vector2 direction = { 0 };
     if (IsKeyDown(KEY_S) && !is_player_attacking()) {
-        direction.x = 1.0f;
+        direction.x = 1;
     }
     if (IsKeyDown(KEY_A) && !is_player_attacking()) {
-        direction.x = -1.0f;
+        direction.x = -1;
     }
     if (IsKeyDown(KEY_W) && !is_player_attacking()) {
-        direction.y = -1.0f;
+        direction.y = -1;
     }
     if (IsKeyDown(KEY_R) && !is_player_attacking()) {
-        direction.y = 1.0f;
+        direction.y = 1;
     }
     m_position = Vector2Add(m_position,
         Vector2Multiply(
