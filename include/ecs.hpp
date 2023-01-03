@@ -22,7 +22,7 @@ public:
 
     // TODO: move collison physics here
 private:
-    void render_map(void);
+    void upload_mapDrawable(void);
     void mover_drawable_upload(void);
 
     void update_movers(void);

@@ -15,15 +15,38 @@ TileMap::~TileMap()
     delete map;
 }
 
-void TileMap::Render(void) { DrawTiled(*map, 0, 0, WHITE); }
+void TileMap::upload_drawable(void)
+{
+    int posY = 0;
+    int posX = 0;
+
+    RaylibTilesonData* data = (RaylibTilesonData*)map->data;
+    if (data == NULL) {
+        TraceLog(LOG_WARNING, "TILESON: Cannot draw empty map");
+        return;
+    }
+    tson::Map* tsonMap = data->map;
+    auto& layers = tsonMap->getLayers();
+
+    // TODO: Draw the background color.
+
+    for (auto& layer : layers) {
+        check_layer(layer, data, posX, posY, WHITE);
+    }
+}
 
 bool TileMap::check_collision(Rectangle& rect)
 {
     bool is_colli = false;
     for (auto& [name, colli_vect] : m_collisionBoxs) {
         for (auto& colli : colli_vect) {
-            if ((bool)debugInfo)
-                DrawRectangleRec(colli, Color { 255, 255, 255, 100 });
+#ifdef DEBUG
+            if ((bool)debugInfo) {
+                RenderObject* rdobj = new RenderObject(colli, Color { 255, 255, 255, 100 }, RECTREC, 0);
+                p_renderer->add_renderObj(rdobj, RENDER_2D);
+                delete rdobj;
+            }
+#endif
             if (CheckCollisionRecs(rect, colli)) {
                 is_colli = true;
             }
@@ -32,10 +55,16 @@ bool TileMap::check_collision(Rectangle& rect)
 
 #ifdef DEBUG
     if ((bool)debugInfo) {
+        RenderObject* rdobj;
         if (is_colli)
-            DrawRectangleLinesEx(rect, 1, Color { 230, 41, 55, 100 });
+            // DrawRectangleLinesEx(rect, 1.0f, Color { 230, 41, 55, 100 });
+            rdobj = new RenderObject(rect, Color { 230, 41, 55, 100 }, 1.0f, RECTLINEEX, 0);
         else
-            DrawRectangleLinesEx(rect, 1, Color { 0, 121, 241, 100 });
+            // DrawRectangleRecEx(rect, 1.0f, Color { 0, 121, 241, 100 });
+            rdobj = new RenderObject(rect, Color { 0, 121, 241, 100 }, 1.0f, RECTLINEEX, 0);
+
+        p_renderer->add_renderObj(rdobj, RENDER_2D);
+        delete rdobj;
     }
 #endif
 
@@ -55,7 +84,7 @@ void TileMap::get_collisionRects()
                 if (obj.getObjectType() == tson::ObjectType::Rectangle) {
                     tson::Rect objRect
                         = Rect(obj.getPosition().x, obj.getPosition().y, obj.getSize().x, obj.getSize().y);
-                    Rectangle worldRect = RectangleFromTiledRectangle(objRect);
+                    Rectangle worldRect = t_to_r_rect(objRect);
                     m_collisionBoxs[obj.getName()].push_back(worldRect);
                 }
             }
@@ -63,7 +92,113 @@ void TileMap::get_collisionRects()
     }
 }
 
-Rectangle TileMap::RectangleFromTiledRectangle(tson::Rect rect)
+// FIXME :move these mess else where
+
+void TileMap::check_layer(tson::Layer& layer, RaylibTilesonData* data, int posX, int posY, Color tint)
+{
+    switch (layer.getType()) {
+    case tson::LayerType::TileLayer:
+        upload_tileLayer(layer, data, posX, posY, tint);
+        break;
+
+    case tson::LayerType::ObjectGroup:
+        uplaod_objLayer(layer, data, posX, posY, tint);
+        break;
+
+    case tson::LayerType::ImageLayer:
+        upload_imgLayer(layer, data, posX, posY, tint);
+        break;
+
+    case tson::LayerType::Group:
+        for (auto& l : layer.getLayers()) {
+            check_layer(l, data, posX, posY, tint);
+        }
+        break;
+
+    default:
+        TraceLog(LOG_TRACE, "TILESON: Unsupported layer type");
+        break;
+    }
+}
+
+void TileMap::upload_tileLayer(tson::Layer& layer, RaylibTilesonData* data, int posX, int posY, Color tint)
+{
+    for (const auto& [pos, tileObject] : layer.getTileObjects()) {
+        tson::Tile* tile = tileObject.getTile();
+        tson::Tileset* tileset = tileObject.getTile()->getTileset();
+        std::string image = tileset->getImage().string();
+        if (data->textures.count(image) == 0) {
+            continue;
+        }
+
+        Texture texture = data->textures[image];
+        Rectangle drawRect = t_to_r_rect(tileObject.getDrawingRect());
+        tson::Vector2f position = tileObject.getPosition();
+        Vector2 drawPos = { position.x + posX, position.y + posY };
+
+        RenderObject* rdobj = new RenderObject(texture, drawRect, drawPos, tint, TEXTURERECT, 0);
+        p_renderer->add_renderObj(rdobj, RENDER_2D);
+        delete rdobj;
+    }
+}
+
+void TileMap::uplaod_objLayer(tson::Layer& layer, RaylibTilesonData* data, int posX, int posY, Color tint)
+{
+
+    // tson::Tileset* tileset = m_map->getTileset("demo-tileset");
+    auto* map = layer.getMap();
+    for (auto& obj : layer.getObjects()) {
+        switch (obj.getObjectType()) {
+        case tson::ObjectType::Text: {
+            if (obj.isVisible()) {
+                auto textObj = obj.getText();
+                const char* text = textObj.text.c_str();
+                auto color = t_to_r_color(textObj.color);
+                auto pos = obj.getPosition();
+
+                // TODO: Find the font size.
+
+                RenderObject* rdobj = new RenderObject(text, posX + pos.x, posY + pos.y, 16, color, TEXT, 0);
+                p_renderer->add_renderObj(rdobj, RENDER_2D);
+                delete rdobj;
+            }
+        }
+        default:
+            break;
+        }
+    }
+}
+
+void TileMap::upload_imgLayer(tson::Layer& layer, RaylibTilesonData* data, int posX, int posY, Color tint)
+{
+
+    NPatchInfo h3PatchInfo
+        = { (Rectangle) { 0.0f, 64.0f, 64.0f, 64.0f }, 8, 8, 8, 8, NPATCH_THREE_PATCH_HORIZONTAL };
+
+    auto image = layer.getImage();
+    if (data->textures.count(image) == 0) {
+        return;
+    }
+
+    Texture texture = data->textures[image];
+    auto offset = layer.getOffset();
+
+    RenderObject* rdobj = new RenderObject(texture, posX + offset.x, posY + offset.y, tint, TEXTURE, 0);
+    p_renderer->add_renderObj(rdobj, RENDER_2D);
+    delete rdobj;
+}
+
+Color TileMap::t_to_r_color(tson::Colori color)
+{
+    Color output;
+    output.r = color.r;
+    output.g = color.g;
+    output.b = color.b;
+    output.a = color.a;
+    return output;
+}
+
+Rectangle TileMap::t_to_r_rect(tson::Rect rect)
 {
     Rectangle output;
     output.x = rect.x;

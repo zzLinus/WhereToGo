@@ -2,6 +2,7 @@
 extern bool debugInfo;
 
 Renderer* AnimSprite::p_renderer = Ecs::get_renderer();
+Renderer* TileMap::p_renderer = Ecs::get_renderer();
 
 Ecs::Ecs()
     : p_tm(nullptr)
@@ -41,14 +42,14 @@ void Ecs::update_movers(void)
     }
 }
 
-void Ecs::render_map() { p_tm->Render(); }
+void Ecs::upload_mapDrawable() { p_tm->Render(); }
 
 void Ecs::update_cam() { p_cam->UpdateCamera(*p_player, deltaTime, SCREEN_WIDTH, SCREEN_HEIGHT); }
 
 void Ecs::render_component(void)
 {
     BeginMode2D(p_cam->cam);
-    render_map();
+    upload_mapDrawable();
     mover_drawable_upload();
 
     get_renderer()->Render_2D();
