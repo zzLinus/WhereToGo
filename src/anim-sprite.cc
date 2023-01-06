@@ -49,7 +49,7 @@ void AnimSprite::upload_drawable(Vector2 position, bool invert)
     RenderObject* rdobj = new RenderObject(m_sprite.texture,
         Rectangle { .x = m_frameRect.x, .y = m_frameRect.y, .width = w, .height = m_frameRect.height },
         Rectangle { position.x, position.y, (float)m_frameRect.width, (float)m_frameRect.height },
-        Vector4 { 0.0f, 0.0f, 0.0f, 0.0f }, WHITE, TEXTUREPRO, 0);
-    p_renderer->add_renderObj(rdobj, RENDER_2D);
+        Vector4 { 0.0f, 0.0f, 0.0f, 0.0f }, WHITE, TEXTUREPRO);
+    p_renderer->add_renderObj(rdobj, RENDER_2D_MOVER);
     delete rdobj;
 }

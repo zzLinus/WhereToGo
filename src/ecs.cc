@@ -13,7 +13,6 @@ Ecs::Ecs()
     p_cam = new Cam();
     p_player = new Player(Vector2 { 300.0f, 280.0f }, Ecs::get_renderer());
     add_movers(p_player);
-    p_tm->get_collisionRects();
 }
 Ecs::~Ecs()
 {
@@ -42,20 +41,25 @@ void Ecs::update_movers(void)
     }
 }
 
-void Ecs::upload_mapDrawable() { p_tm->Render(); }
+void Ecs::upload_mapDrawable() { p_tm->upload_drawable(); }
 
 void Ecs::update_cam() { p_cam->UpdateCamera(*p_player, deltaTime, SCREEN_WIDTH, SCREEN_HEIGHT); }
 
 void Ecs::render_component(void)
 {
+    p_tm->get_collisionRects();
+    p_tm->check_collision(p_player->m_collisionBox);
     BeginMode2D(p_cam->cam);
     upload_mapDrawable();
     mover_drawable_upload();
 
+    get_renderer()->Render_2D_bg();
     get_renderer()->Render_2D();
-    p_tm->check_collision(p_player->m_collisionBox);
+    get_renderer()->Render_2D_colli();
     EndMode2D();
     get_renderer()->Render_NORM();
+    if (debugInfo)
+        DrawFPS(SCREEN_WIDTH - 100, 30);
 }
 
 void Ecs::update_component()

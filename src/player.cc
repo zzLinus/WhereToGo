@@ -128,23 +128,23 @@ void Player::upload_hud_drawobj()
 
         RenderObject* rdobj;
 
-        rdobj = new RenderObject((char*)"Debug INFO", 15, 20, 20, RAYWHITE, TEXT, 0);
+        rdobj = new RenderObject((char*)"Debug Mode", 15, 20, 20, RAYWHITE, TEXT);
         p_renderer->add_renderObj(rdobj, RENDER_NOR);
         delete rdobj;
 
-        rdobj = new RenderObject(m_animSprites[m_curState].m_sprite.texture, 15, 40, WHITE, TEXTURE, 0);
+        rdobj = new RenderObject(m_animSprites[m_curState].m_sprite.texture, 15, 40, WHITE, TEXTURE);
         p_renderer->add_renderObj(rdobj, RENDER_NOR);
         delete rdobj;
 
         rdobj = new RenderObject(15, 40, m_animSprites[m_curState].m_sprite.texture.width,
-            m_animSprites[m_curState].m_sprite.texture.height, LIME, RECTLINE, 0);
+            m_animSprites[m_curState].m_sprite.texture.height, LIME, RECTLINE);
         p_renderer->add_renderObj(rdobj, RENDER_NOR);
         delete rdobj;
 
         rdobj = new RenderObject(15 + (int)m_animSprites[m_curState].m_frameRect.x,
             40 + (int)m_animSprites[m_curState].m_frameRect.y,
             (int)m_animSprites[m_curState].m_frameRect.width,
-            (int)m_animSprites[m_curState].m_frameRect.height, RED, RECTLINE, 0);
+            (int)m_animSprites[m_curState].m_frameRect.height, RED, RECTLINE);
         p_renderer->add_renderObj(rdobj, RENDER_NOR);
         delete rdobj;
     }

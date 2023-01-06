@@ -22,6 +22,9 @@ enum renderType {
 
 enum renderMode {
     RENDER_2D = 0,
+    RENDER_2D_MOVER,
+    RENDER_2D_COLLI,
+    RENDER_2D_BG,
     RENDER_NOR,
 };
 
@@ -32,9 +35,9 @@ struct RenderObject {
     Color color;
     renderType rdt; // NOTE :rdt -> render data type
     float lineThick;
-    int layer;
     char text[64];
     Vector4 vec4;
+    float y;
     RenderObject()
     {
         m_texture = { 0 };
@@ -43,12 +46,12 @@ struct RenderObject {
         color = { 0 };
         rdt = INVALID;
         lineThick = 0.0f;
-        layer = 0;
+        y = -1;
         vec4 = { 0.0f };
         strcpy(text, "");
     }
-    RenderObject(const char* str, int posX, int posY, int fontThick, Color c, renderType t,
-        int l) // NOTE :DrawText()
+    RenderObject(
+        const char* str, int posX, int posY, int fontThick, Color c, renderType t) // NOTE :DrawText()
         : RenderObject()
     {
         strcpy(text, str);
@@ -57,9 +60,9 @@ struct RenderObject {
         m_source.width = (float)fontThick;
         color = c;
         rdt = t;
-        layer = l;
+        y = m_source.y;
     }
-    RenderObject(Texture2D texture, int posX, int posY, Color c, renderType t, int l) // NOTE :DrawTexture()
+    RenderObject(Texture2D texture, int posX, int posY, Color c, renderType t) // NOTE :DrawTexture()
         : RenderObject()
     {
         m_texture = texture;
@@ -67,9 +70,9 @@ struct RenderObject {
         m_source.y = (float)posY;
         color = c;
         rdt = t;
-        layer = l;
+        y = m_source.y + m_texture.height;
     }
-    RenderObject(int x, int y, int w, int h, Color c, renderType t, int l) // NOTE :DrawRectangleLines()
+    RenderObject(int x, int y, int w, int h, Color c, renderType t) // NOTE :DrawRectangleLines()
         : RenderObject()
     {
         m_source.x = x;
@@ -78,10 +81,9 @@ struct RenderObject {
         m_source.height = (float)h;
         color = c;
         rdt = t;
-        layer = l;
+        y = m_source.y + m_source.height;
     }
-    RenderObject(
-        Texture2D texture, Rectangle source, Rectangle dest, Vector4 v4, Color c, renderType t, int l)
+    RenderObject(Texture2D texture, Rectangle source, Rectangle dest, Vector4 v4, Color c, renderType t)
         : RenderObject() // NOTE :DrawTexturePro()
     {
         m_texture = texture;
@@ -90,9 +92,9 @@ struct RenderObject {
         vec4 = v4;
         rdt = t;
         color = c;
-        layer = l;
+        y = m_texture.height + m_dest.y;
     }
-    RenderObject(Texture2D texture, Rectangle source, Vector2 pos, Color c, renderType t, int l)
+    RenderObject(Texture2D texture, Rectangle source, Vector2 pos, Color c, renderType t)
         : RenderObject() // NOTE :DrawTextureRec()
     {
         m_texture = texture;
@@ -100,23 +102,23 @@ struct RenderObject {
         vec4 = Vector4 { .x = pos.x, .y = pos.y };
         rdt = t;
         color = c;
-        layer = l;
+        y = m_texture.height + vec4.y;
     }
-    RenderObject(Rectangle rect, Color c, renderType t, int l)
+    RenderObject(Rectangle rect, Color c, renderType t)
         : RenderObject() // NOTE :DrawRectangleRec()
     {
         m_source = rect;
         color = c;
         rdt = t;
-        layer = l;
+        y = m_source.height + m_source.y;
     }
-    RenderObject(Rectangle rect, Color c, float lt, renderType t, int l)
+    RenderObject(Rectangle rect, Color c, float lt, renderType t)
         : RenderObject() // NOTE : DrawRectangleLinesEx()
     {
         m_source = rect;
         lineThick = lt;
         color = c;
         rdt = t;
-        layer = l;
+        y = m_source.height + m_source.y;
     }
 };

@@ -40,30 +40,24 @@ bool TileMap::check_collision(Rectangle& rect)
     bool is_colli = false;
     for (auto& [name, colli_vect] : m_collisionBoxs) {
         for (auto& colli : colli_vect) {
-#ifdef DEBUG
-            if ((bool)debugInfo) {
-                RenderObject* rdobj = new RenderObject(colli, Color { 255, 255, 255, 100 }, RECTREC, 0);
-                p_renderer->add_renderObj(rdobj, RENDER_2D);
-                delete rdobj;
-            }
-#endif
             if (CheckCollisionRecs(rect, colli)) {
                 is_colli = true;
+                break;
             }
         }
+        if (is_colli)
+            break;
     }
 
 #ifdef DEBUG
     if ((bool)debugInfo) {
         RenderObject* rdobj;
         if (is_colli)
-            // DrawRectangleLinesEx(rect, 1.0f, Color { 230, 41, 55, 100 });
-            rdobj = new RenderObject(rect, Color { 230, 41, 55, 100 }, 1.0f, RECTLINEEX, 0);
+            rdobj = new RenderObject(rect, Color { 230, 41, 55, 100 }, 1.0f, RECTLINEEX);
         else
-            // DrawRectangleRecEx(rect, 1.0f, Color { 0, 121, 241, 100 });
-            rdobj = new RenderObject(rect, Color { 0, 121, 241, 100 }, 1.0f, RECTLINEEX, 0);
+            rdobj = new RenderObject(rect, Color { 0, 121, 241, 100 }, 1.0f, RECTLINEEX);
 
-        p_renderer->add_renderObj(rdobj, RENDER_2D);
+        p_renderer->add_renderObj(rdobj, RENDER_2D_COLLI);
         delete rdobj;
     }
 #endif
@@ -75,6 +69,7 @@ void TileMap::get_collisionRects()
 {
     // TODO: add collison detect function
     //
+    m_collisionBoxs.clear();
     RaylibTilesonData* data = (RaylibTilesonData*)map->data;
     tson::Map* tsonMap = data->map;
     auto& layers = tsonMap->getLayers();
@@ -136,7 +131,7 @@ void TileMap::upload_tileLayer(tson::Layer& layer, RaylibTilesonData* data, int 
         tson::Vector2f position = tileObject.getPosition();
         Vector2 drawPos = { position.x + posX, position.y + posY };
 
-        RenderObject* rdobj = new RenderObject(texture, drawRect, drawPos, tint, TEXTURERECT, 0);
+        RenderObject* rdobj = new RenderObject(texture, drawRect, drawPos, tint, TEXTURERECT);
         p_renderer->add_renderObj(rdobj, RENDER_2D);
         delete rdobj;
     }
@@ -144,8 +139,6 @@ void TileMap::upload_tileLayer(tson::Layer& layer, RaylibTilesonData* data, int 
 
 void TileMap::uplaod_objLayer(tson::Layer& layer, RaylibTilesonData* data, int posX, int posY, Color tint)
 {
-
-    // tson::Tileset* tileset = m_map->getTileset("demo-tileset");
     auto* map = layer.getMap();
     for (auto& obj : layer.getObjects()) {
         switch (obj.getObjectType()) {
@@ -158,10 +151,22 @@ void TileMap::uplaod_objLayer(tson::Layer& layer, RaylibTilesonData* data, int p
 
                 // TODO: Find the font size.
 
-                RenderObject* rdobj = new RenderObject(text, posX + pos.x, posY + pos.y, 16, color, TEXT, 0);
+                RenderObject* rdobj = new RenderObject(text, posX + pos.x, posY + pos.y, 16, color, TEXT);
                 p_renderer->add_renderObj(rdobj, RENDER_2D);
                 delete rdobj;
             }
+        }
+        case tson::ObjectType::Rectangle: {
+            tson::Rect objRect
+                = Rect(obj.getPosition().x, obj.getPosition().y, obj.getSize().x, obj.getSize().y);
+            Rectangle worldRect = t_to_r_rect(objRect);
+#ifdef DEBUG
+            if ((bool)debugInfo) {
+                RenderObject* rdobj = new RenderObject(worldRect, Color { 255, 255, 255, 100 }, RECTREC);
+                p_renderer->add_renderObj(rdobj, RENDER_2D_COLLI);
+                delete rdobj;
+            }
+#endif
         }
         default:
             break;
@@ -183,8 +188,11 @@ void TileMap::upload_imgLayer(tson::Layer& layer, RaylibTilesonData* data, int p
     Texture texture = data->textures[image];
     auto offset = layer.getOffset();
 
-    RenderObject* rdobj = new RenderObject(texture, posX + offset.x, posY + offset.y, tint, TEXTURE, 0);
-    p_renderer->add_renderObj(rdobj, RENDER_2D);
+    RenderObject* rdobj = new RenderObject(texture, posX + offset.x, posY + offset.y, tint, TEXTURE);
+    if (layer.getName().compare("base_rock") == 0 || layer.getName().compare("bricks") == 0)
+        p_renderer->add_renderObj(rdobj, RENDER_2D_BG);
+    else
+        p_renderer->add_renderObj(rdobj, RENDER_2D);
     delete rdobj;
 }
 

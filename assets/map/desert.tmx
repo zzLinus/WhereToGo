@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="96" nextobjectid="94">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="96" nextobjectid="95">
  <editorsettings>
   <export target="desert.json" format="json"/>
  </editorsettings>
@@ -9,185 +9,185 @@
   </imagelayer>
  </group>
  <group id="87" name="rocks">
-  <imagelayer id="53" name="rocks" offsetx="294.727" offsety="314">
-   <image source="rocks.png" width="16" height="16"/>
+  <imagelayer id="53" name="rocks" offsetx="297.06" offsety="316.958">
+   <image source="rocks.png" width="14" height="9"/>
   </imagelayer>
   <imagelayer id="54" name="rocks的副本" offsetx="179.636" offsety="329.455">
-   <image source="rocks.png" width="16" height="16"/>
+   <image source="rocks.png" width="14" height="9"/>
   </imagelayer>
   <imagelayer id="55" name="rocks的副本的副本" offsetx="266.545" offsety="336">
-   <image source="rocks.png" width="16" height="16"/>
+   <image source="rocks.png" width="14" height="9"/>
   </imagelayer>
   <imagelayer id="59" name="rocks1" offsetx="244.182" offsety="303.091">
-   <image source="rocks1.png" width="16" height="16"/>
+   <image source="rocks1.png" width="7" height="5"/>
   </imagelayer>
   <imagelayer id="65" name="rocks1的副本" offsetx="305" offsety="277">
-   <image source="rocks1.png" width="16" height="16"/>
+   <image source="rocks1.png" width="7" height="5"/>
   </imagelayer>
   <imagelayer id="66" name="rocks2" offsetx="284.364" offsety="289.455">
-   <image source="rocks2.png" width="16" height="16"/>
+   <image source="rocks2.png" width="4" height="2"/>
   </imagelayer>
   <imagelayer id="67" name="rocks2的副本" offsetx="194.727" offsety="332.182">
-   <image source="rocks2.png" width="16" height="16"/>
+   <image source="rocks2.png" width="4" height="2"/>
   </imagelayer>
   <imagelayer id="68" name="rocks2的副本的副本" offsetx="279.455" offsety="352">
-   <image source="rocks2.png" width="16" height="16"/>
+   <image source="rocks2.png" width="4" height="2"/>
   </imagelayer>
   <imagelayer id="69" name="rocks2的副本的副本的副本" offsetx="315.091" offsety="304.909">
-   <image source="rocks2.png" width="16" height="16"/>
+   <image source="rocks2.png" width="4" height="2"/>
   </imagelayer>
-  <imagelayer id="70" name="rocks2的副本的副本的副本的副本" offsetx="237.091" offsety="369.091">
-   <image source="rocks2.png" width="16" height="16"/>
+  <imagelayer id="70" name="rocks2的副本的副本的副本的副本" offsetx="241.818" offsety="372.364">
+   <image source="rocks2.png" width="4" height="2"/>
   </imagelayer>
   <imagelayer id="71" name="rocks3" offsetx="166.182" offsety="339.818">
-   <image source="rocks3.png" width="16" height="16"/>
+   <image source="rocks3.png" width="5" height="3"/>
   </imagelayer>
   <imagelayer id="72" name="rocks3的副本" offsetx="312.545" offsety="304">
-   <image source="rocks3.png" width="16" height="16"/>
+   <image source="rocks3.png" width="5" height="3"/>
   </imagelayer>
   <imagelayer id="73" name="rocks3的副本的副本" offsetx="284.727" offsety="350.182">
-   <image source="rocks3.png" width="16" height="16"/>
+   <image source="rocks3.png" width="5" height="3"/>
   </imagelayer>
   <imagelayer id="74" name="rocks3的副本的副本的副本" offsetx="163.091" offsety="341.091">
-   <image source="rocks3.png" width="16" height="16"/>
+   <image source="rocks3.png" width="5" height="3"/>
   </imagelayer>
   <imagelayer id="60" name="rocks1的副本" offsetx="305.091" offsety="360.727">
-   <image source="rocks1.png" width="16" height="16"/>
+   <image source="rocks1.png" width="7" height="5"/>
   </imagelayer>
   <imagelayer id="61" name="rocks1的副本的副本" offsetx="199.818" offsety="370.909">
-   <image source="rocks1.png" width="16" height="16"/>
+   <image source="rocks1.png" width="7" height="5"/>
   </imagelayer>
   <imagelayer id="62" name="rocks1的副本的副本的副本" offsetx="173.636" offsety="319.818">
-   <image source="rocks1.png" width="16" height="16"/>
+   <image source="rocks1.png" width="7" height="5"/>
   </imagelayer>
  </group>
- <group id="88" name="bricks">
-  <imagelayer id="46" name="bricks的副本" offsetx="216.447" offsety="334.746">
-   <image source="bricks.png" width="16" height="16"/>
+ <group id="88" name="bricks" offsetx="4" offsety="2.90909">
+  <imagelayer id="46" name="bricks" offsetx="214.731" offsety="334.178">
+   <image source="bricks.png" width="4" height="5"/>
   </imagelayer>
-  <imagelayer id="47" name="bricks的副本的副本" offsetx="203.322" offsety="343.746">
-   <image source="bricks.png" width="16" height="16"/>
+  <imagelayer id="47" name="bricks" offsetx="203.97" offsety="344.303">
+   <image source="bricks.png" width="4" height="5"/>
   </imagelayer>
-  <imagelayer id="41" name="bricks的副本" offsetx="228.47" offsety="351.133">
-   <image source="bricks.png" width="16" height="16"/>
+  <imagelayer id="41" name="bricks" offsetx="230.652" offsety="350.769">
+   <image source="bricks.png" width="4" height="5"/>
   </imagelayer>
-  <imagelayer id="34" name="bricks.1" offsetx="230.686" offsety="368.28">
-   <image source="bricks.png" width="16" height="16"/>
+  <imagelayer id="34" name="bricks" offsetx="230.163" offsety="368.416">
+   <image source="bricks.png" width="4" height="5"/>
   </imagelayer>
-  <imagelayer id="35" name="bricks.2" offsetx="234.402" offsety="376.133">
-   <image source="bricks.png" width="16" height="16"/>
+  <imagelayer id="35" name="bricks" offsetx="234.857" offsety="377.883">
+   <image source="bricks.png" width="4" height="5"/>
   </imagelayer>
-  <imagelayer id="38" name="bricks1" offsetx="217.428" offsety="354.75">
-   <image source="bricks3.png" width="16" height="16"/>
+  <imagelayer id="38" name="bricks" offsetx="217.087" offsety="351.67">
+   <image source="bricks3.png" width="12" height="12"/>
   </imagelayer>
-  <imagelayer id="36" name="bricks2" offsetx="210.466" offsety="377.5">
-   <image source="bricks1.png" width="32" height="16"/>
+  <imagelayer id="36" name="bricks" offsetx="211.375" offsety="376.955">
+   <image source="bricks1.png" width="20" height="9"/>
   </imagelayer>
-  <imagelayer id="44" name="bricks2的副本" offsetx="223.227" offsety="339.602">
-   <image source="bricks1.png" width="32" height="16"/>
+  <imagelayer id="44" name="bricks" offsetx="225.943" offsety="339.557">
+   <image source="bricks1.png" width="20" height="9"/>
   </imagelayer>
-  <imagelayer id="39" name="bricks2.1" offsetx="206" offsety="365.409">
-   <image source="bricks1.png" width="32" height="16"/>
+  <imagelayer id="39" name="bricks" offsetx="207" offsety="365.602">
+   <image source="bricks1.png" width="20" height="9"/>
   </imagelayer>
-  <imagelayer id="37" name="bricks3" offsetx="232.023" offsety="359.595">
-   <image source="bricks2.png" width="16" height="16"/>
+  <imagelayer id="37" name="bricks" offsetx="231.841" offsety="359.231">
+   <image source="bricks2.png" width="10" height="6"/>
   </imagelayer>
-  <imagelayer id="43" name="bricks3的副本" offsetx="238.523" offsety="350.47">
-   <image source="bricks2.png" width="16" height="16"/>
+  <imagelayer id="43" name="bricks" offsetx="238.887" offsety="350.47">
+   <image source="bricks2.png" width="10" height="6"/>
   </imagelayer>
-  <imagelayer id="45" name="bricks3的副本的副本" offsetx="212.898" offsety="341.345">
-   <image source="bricks2.png" width="16" height="16"/>
+  <imagelayer id="45" name="bricks" offsetx="213.625" offsety="343.163">
+   <image source="bricks2.png" width="10" height="6"/>
   </imagelayer>
-  <imagelayer id="40" name="bricks3.1" offsetx="204.489" offsety="353.572">
-   <image source="bricks2.png" width="16" height="16"/>
+  <imagelayer id="40" name="bricks" offsetx="204.75" offsety="350.992">
+   <image source="bricks2.png" width="10" height="6"/>
   </imagelayer>
-  <imagelayer id="33" name="bricks" offsetx="203.197" offsety="375.496">
-   <image source="bricks.png" width="16" height="16"/>
+  <imagelayer id="33" name="bricks" offsetx="204.333" offsety="376.371">
+   <image source="bricks.png" width="4" height="5"/>
   </imagelayer>
  </group>
  <group id="89" name="grass">
-  <imagelayer id="22" name="grass" offsetx="198.25" offsety="329.5">
-   <image source="grass1.png" width="16" height="16"/>
+  <imagelayer id="22" name="grass" offsetx="193.75" offsety="328">
+   <image source="grass1.png" width="12" height="7"/>
   </imagelayer>
-  <imagelayer id="23" name="grass.1" offsetx="240" offsety="320.75">
-   <image source="grass1.png" width="16" height="16"/>
+  <imagelayer id="23" name="grass.1" offsetx="243" offsety="319.25">
+   <image source="grass1.png" width="12" height="7"/>
   </imagelayer>
-  <imagelayer id="24" name="grass.2" offsetx="255" offsety="354">
-   <image source="grass1.png" width="16" height="16"/>
+  <imagelayer id="24" name="grass.2" offsetx="256.5" offsety="359">
+   <image source="grass1.png" width="12" height="7"/>
   </imagelayer>
-  <imagelayer id="25" name="grass1" offsetx="164.864" offsety="352.068">
-   <image source="grass2.png" width="16" height="16"/>
+  <imagelayer id="25" name="grass1" offsetx="166.364" offsety="355.068">
+   <image source="grass2.png" width="12" height="7"/>
   </imagelayer>
-  <imagelayer id="26" name="grass1.1" offsetx="291.75" offsety="316.5">
-   <image source="grass2.png" width="16" height="16"/>
+  <imagelayer id="26" name="grass1.1" offsetx="291.25" offsety="320">
+   <image source="grass2.png" width="12" height="7"/>
   </imagelayer>
-  <imagelayer id="27" name="grass2" offsetx="176.898" offsety="331.807">
-   <image source="grass3.png" width="16" height="16"/>
+  <imagelayer id="27" name="grass2" offsetx="175.898" offsety="331.307">
+   <image source="grass3.png" width="9" height="6"/>
   </imagelayer>
-  <imagelayer id="49" name="grass3" offsetx="213.886" offsety="304.727">
-   <image source="grass4.png" width="16" height="16"/>
+  <imagelayer id="49" name="grass3" offsetx="216.386" offsety="316.227">
+   <image source="grass4.png" width="8" height="4"/>
   </imagelayer>
-  <imagelayer id="50" name="grass3的副本" offsetx="283.455" offsety="285.455">
-   <image source="grass4.png" width="16" height="16"/>
+  <imagelayer id="50" name="grass3的副本" offsetx="280.455" offsety="287.455">
+   <image source="grass4.png" width="8" height="4"/>
   </imagelayer>
-  <imagelayer id="51" name="grass4" offsetx="315.705" offsety="330.341">
-   <image source="grass3.png" width="16" height="16"/>
+  <imagelayer id="51" name="grass4" offsetx="309.455" offsety="333.341">
+   <image source="grass3.png" width="9" height="6"/>
   </imagelayer>
-  <imagelayer id="28" name="grass2.1" offsetx="237.875" offsety="302.5">
-   <image source="grass3.png" width="16" height="16"/>
+  <imagelayer id="28" name="grass2.1" offsetx="238.625" offsety="301.75">
+   <image source="grass3.png" width="9" height="6"/>
   </imagelayer>
-  <imagelayer id="29" name="grass2.2" offsetx="299.125" offsety="359.25">
-   <image source="grass3.png" width="16" height="16"/>
+  <imagelayer id="29" name="grass2.2" offsetx="300.5" offsety="359.75">
+   <image source="grass3.png" width="9" height="6"/>
   </imagelayer>
  </group>
  <group id="90" name="tree">
-  <imagelayer id="15" name="tree" offsetx="303" offsety="225">
-   <image source="tree.png" width="48" height="61"/>
+  <imagelayer id="19" name="tree4" offsetx="226.758" offsety="269.121">
+   <image source="tree1.png" width="24" height="17"/>
   </imagelayer>
-  <imagelayer id="21" name="tree1" offsetx="254.424" offsety="315.697">
-   <image source="tree2.png" width="25" height="33"/>
+  <imagelayer id="15" name="tree" offsetx="303.333" offsety="226.25">
+   <image source="tree.png" width="47" height="61"/>
   </imagelayer>
-  <imagelayer id="19" name="tree4" offsetx="225" offsety="268">
-   <image source="tree1.png" width="32" height="18"/>
+  <imagelayer id="16" name="tree2" offsetx="146.583" offsety="268.083">
+   <image source="tree4.png" width="60" height="63"/>
   </imagelayer>
-  <imagelayer id="20" name="tree4的副本" offsetx="305.5" offsety="370.5">
-   <image source="tree1.png" width="32" height="18"/>
+  <imagelayer id="21" name="tree1" offsetx="257.257" offsety="315.364">
+   <image source="tree2.png" width="23" height="32"/>
   </imagelayer>
-  <imagelayer id="16" name="tree2" offsetx="144.75" offsety="265.875">
-   <image source="tree4.png" width="62" height="64"/>
+  <imagelayer id="20" name="tree4的副本" offsetx="307.583" offsety="371.917">
+   <image source="tree1.png" width="24" height="17"/>
   </imagelayer>
  </group>
  <group id="91" name="grass-upper-tree">
-  <imagelayer id="58" name="grass的副本" offsetx="315" offsety="278">
-   <image source="grass1.png" width="16" height="16"/>
+  <imagelayer id="58" name="grass的副本" offsetx="306.682" offsety="281.227">
+   <image source="grass1.png" width="12" height="7"/>
   </imagelayer>
-  <imagelayer id="56" name="grass4的副本" offsetx="252.909" offsety="338.182">
-   <image source="grass3.png" width="16" height="16"/>
+  <imagelayer id="56" name="grass4的副本" offsetx="257.136" offsety="342.455">
+   <image source="grass3.png" width="9" height="6"/>
   </imagelayer>
-  <imagelayer id="64" name="grass1的副本" offsetx="158.131" offsety="320.023">
-   <image source="grass2.png" width="16" height="16"/>
+  <imagelayer id="64" name="grass1的副本" offsetx="163.131" offsety="322.606">
+   <image source="grass2.png" width="12" height="7"/>
   </imagelayer>
  </group>
  <group id="92" name="lamp">
-  <imagelayer id="30" name="lanter" offsetx="241.136" offsety="356.045">
-   <image source="streatlamp.png" width="28" height="31"/>
+  <imagelayer id="30" name="lanter" offsetx="240.636" offsety="352.045">
+   <image source="streatlamp.png" width="26" height="30"/>
   </imagelayer>
-  <imagelayer id="31" name="lanter2" offsetx="215" offsety="253">
+  <imagelayer id="31" name="lanter2" offsetx="216.625" offsety="254.5">
    <image source="steatlamp3.png" width="23" height="34"/>
   </imagelayer>
-  <imagelayer id="32" name="lanter3" offsetx="193.864" offsety="348.409">
-   <image source="steatlamp1.png" width="23" height="35"/>
+  <imagelayer id="32" name="lanter3" offsetx="193.364" offsety="351.409">
+   <image source="steatlamp1.png" width="22" height="34"/>
   </imagelayer>
  </group>
  <group id="93" name="grass-upper-lamp">
-  <imagelayer id="52" name="grass4的副本" offsetx="214.773" offsety="277.453">
-   <image source="grass3.png" width="16" height="16"/>
+  <imagelayer id="52" name="grass4的副本" offsetx="219.898" offsety="282.078">
+   <image source="grass3.png" width="9" height="6"/>
   </imagelayer>
-  <imagelayer id="48" name="grass2的副本" offsetx="191.966" offsety="372.716">
-   <image source="grass3.png" width="16" height="16"/>
+  <imagelayer id="48" name="grass2的副本" offsetx="193.049" offsety="377.549">
+   <image source="grass3.png" width="9" height="6"/>
   </imagelayer>
  </group>
- <objectgroup id="5" name="mapcollision" visible="0">
+ <objectgroup id="5" name="mapcollision">
   <object id="18" name="collision" x="160.724" y="330.467" width="3.09094" height="46.5206"/>
   <object id="19" name="collision" x="244.383" y="391.195" width="40.4716" height="5.37873"/>
   <object id="21" name="collision" x="328.044" y="282.013" width="2.0985" height="113.669"/>
@@ -202,33 +202,33 @@
   <object id="52" name="collision" x="195.818" y="403.272" width="13.8535" height="11.8017"/>
   <object id="53" name="collision" x="285.037" y="390.22" width="43.5625" height="5.46964"/>
  </objectgroup>
- <objectgroup id="75" name="tree" visible="0">
-  <object id="55" name="tree" x="165.696" y="324.478" width="17.1739" height="5.30435"/>
-  <object id="57" name="tree" x="260.375" y="343.125" width="10.875" height="5.875"/>
+ <objectgroup id="75" name="tree">
+  <object id="55" name="tree" x="162.514" y="326.023" width="17.1739" height="5.30435"/>
+  <object id="57" name="tree" x="262.875" y="341.625" width="10.875" height="5.875"/>
   <object id="58" name="tree" x="226.625" y="282.875" width="17" height="3.5"/>
   <object id="59" name="tree" x="313" y="284" width="14.125" height="4.875"/>
   <object id="60" name="tree" x="317" y="384.375" width="9.25" height="4.75"/>
  </objectgroup>
- <objectgroup id="76" name="lamp" visible="0">
-  <object id="62" name="lamp" x="197.182" y="378.455" width="10.4545" height="5"/>
-  <object id="63" name="lamp" x="253.818" y="381.636" width="9.81818" height="5"/>
+ <objectgroup id="76" name="lamp">
+  <object id="62" name="lamp" x="195.932" y="380.455" width="10.4545" height="5"/>
+  <object id="63" name="lamp" x="251.943" y="376.511" width="9.81818" height="5"/>
   <object id="93" name="lamp" x="225.091" y="282.364" width="10.3636" height="4.72727"/>
  </objectgroup>
  <objectgroup id="77" name="grass&amp;rocks">
-  <object id="65" name="g-r" x="171.875" y="361.188" width="3.0625" height="1.75"/>
-  <object id="68" name="g-r" x="183.813" y="338.625" width="8.5" height="4.25"/>
-  <object id="69" name="g-r" x="202.375" y="338.75" width="6" height="2.4375"/>
+  <object id="65" name="g-r" x="170.966" y="359.733" width="3.0625" height="1.75"/>
+  <object id="68" name="g-r" x="182.086" y="333.08" width="8.5" height="4.25"/>
+  <object id="69" name="g-r" x="197.193" y="332.295" width="6" height="2.4375"/>
   <object id="71" name="g-r" x="245.022" y="377.178" width="2.11111" height="0.888889"/>
-  <object id="72" name="g-r" x="287.356" y="360.044" width="7.2" height="1.2"/>
-  <object id="74" name="g-r" x="307.978" y="368.089" width="5.37778" height="2.53333"/>
+  <object id="72" name="g-r" x="280.856" y="352.606" width="7.2" height="1.2"/>
+  <object id="74" name="g-r" x="303.541" y="363.276" width="5.37778" height="2.53333"/>
   <object id="79" name="g-r" x="298.063" y="323.313" width="7.6875" height="4.3125"/>
-  <object id="80" name="g-r" x="322.75" y="338.875" width="3.125" height="2.375"/>
-  <object id="81" name="g-r" x="246.313" y="329.125" width="4.375" height="3.5"/>
-  <object id="82" name="g-r" x="245.813" y="311" width="6.5" height="2.25"/>
-  <object id="83" name="g-r" x="220.5" y="315.5" width="2.5" height="1.1875"/>
-  <object id="85" name="g-r" x="272.375" y="345.188" width="6.875" height="4.875"/>
-  <object id="87" name="g-r" x="170.563" y="350.375" width="4.8125" height="1.5625"/>
-  <object id="89" name="g-r" x="290" y="296.625" width="3.625" height="1.6875"/>
-  <object id="90" name="g-r" x="319.813" y="313.313" width="4.1875" height="1.6875"/>
+  <object id="80" name="g-r" x="312.477" y="337.148" width="3.125" height="2.375"/>
+  <object id="81" name="g-r" x="247.25" y="322.625" width="4.375" height="3.5"/>
+  <object id="82" name="g-r" x="240.358" y="305.909" width="6.5" height="2.25"/>
+  <object id="83" name="g-r" x="218.864" y="318.864" width="2.5" height="1.1875"/>
+  <object id="85" name="g-r" x="258.375" y="347.563" width="6.875" height="4.875"/>
+  <object id="87" name="g-r" x="164.381" y="342.557" width="4.8125" height="1.5625"/>
+  <object id="89" name="g-r" x="282.875" y="289.688" width="3.625" height="1.6875"/>
+  <object id="90" name="g-r" x="313.722" y="305.222" width="4.1875" height="1.6875"/>
  </objectgroup>
 </map>
