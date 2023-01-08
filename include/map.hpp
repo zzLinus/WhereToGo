@@ -29,6 +29,7 @@ public:
 private:
 public:
     Map* map;
+    Vector2 spownPoint;
     std::map<std::string, std::vector<Rectangle>> m_collisionBoxs;
 
     static Renderer* p_renderer;

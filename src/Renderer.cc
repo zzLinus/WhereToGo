@@ -9,16 +9,31 @@ Renderer::~Renderer() { }
 
 void Renderer::add_renderObj(RenderObject* renderObj, renderMode rm)
 {
-    if (rm == RENDER_2D)
+    switch (rm) {
+    case RENDER_2D: {
         renderObjs_2d.push_back(*renderObj);
-    else if (rm == RENDER_2D_MOVER)
+        break;
+    }
+    case RENDER_2D_MOVER: {
         renderObjs_2d_mover.push_back(*renderObj);
-    else if (rm == RENDER_2D_BG)
+        break;
+    }
+    case RENDER_2D_BG: {
         renderObjs_2d_bg.push_back(*renderObj);
-    else if (rm == RENDER_2D_COLLI)
+        break;
+    }
+    case RENDER_2D_COLLI: {
         renderObjs_2d_colli.push_back(*renderObj);
-    else if (rm == RENDER_NOR)
+        break;
+    }
+    case RENDER_NOR: {
         renderObjs_norm.push_back(*renderObj);
+        break;
+    }
+    default: {
+        break;
+    }
+    }
 }
 
 void Renderer::Render_2D(void)
@@ -79,6 +94,16 @@ void Renderer::Render_2D(void)
         case RECTREC: {
             Render_2D_mover(rdobj.y);
             DrawRectangleRec(rdobj.m_source, rdobj.color);
+#ifdef DEBUG
+            if ((bool)debugInfo)
+                DrawLine(rdobj.m_source.x, rdobj.y, rdobj.m_source.x + rdobj.m_source.width, rdobj.y, RED);
+#endif
+            break;
+        }
+        case RECT: {
+            Render_2D_mover(rdobj.y);
+            DrawRectangle(
+                rdobj.m_source.x, rdobj.m_source.y, rdobj.m_source.width, rdobj.m_source.height, rdobj.color);
 #ifdef DEBUG
             if ((bool)debugInfo)
                 DrawLine(rdobj.m_source.x, rdobj.y, rdobj.m_source.x + rdobj.m_source.width, rdobj.y, RED);

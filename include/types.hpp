@@ -1,6 +1,13 @@
 #pragma once
 #include <raylib.h>
 #include <string.h>
+
+#if defined(PLATFORM_DESKTOP)
+#    define GLSL_VERSION 330
+#else // PLATFORM_RPI, PLATFORM_ANDROID, PLATFORM_WEB
+#    define GLSL_VERSION 100
+#endif
+
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
 
@@ -16,6 +23,7 @@ enum renderType {
     TEXTURERECT,
     TEXTUREPRO,
     RECTLINE,
+    RECT,
     RECTLINEEX,
     RECTREC,
 };
@@ -72,8 +80,8 @@ struct RenderObject {
         rdt = t;
         y = m_source.y + m_texture.height;
     }
-    RenderObject(int x, int y, int w, int h, Color c, renderType t) // NOTE :DrawRectangleLines()
-        : RenderObject()
+    RenderObject(int x, int y, int w, int h, Color c, renderType t)
+        : RenderObject() // NOTE :DrawRectangleLines() DrawRectangle()
     {
         m_source.x = x;
         m_source.y = y;

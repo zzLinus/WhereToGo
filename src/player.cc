@@ -124,7 +124,6 @@ void Player::upload_hud_drawobj()
 {
 #ifdef DEBUG // NOTE :render debug info
     if (debugInfo == DebugInfo::enable) {
-        DrawFPS(SCREEN_WIDTH - 100, 10);
 
         RenderObject* rdobj;
 

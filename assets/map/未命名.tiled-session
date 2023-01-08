@@ -1,0 +1,24 @@
+{
+    "activeFile": "desert.tmx",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "desert.tmx": {
+            "scale": 5.5,
+            "selectedLayer": 67,
+            "viewCenter": {
+                "x": 249.72727272727275,
+                "y": 316.81818181818187
+            }
+        }
+    },
+    "last.exportedFilePath": "/home/zzlinus/Dev/CPP/WhereToGo/assets/map",
+    "map.lastUsedExportFilter": "全部文件 (*)",
+    "openFiles": [
+        "desert.tmx"
+    ],
+    "project": "未命名.tiled-project",
+    "recentFiles": [
+        "desert.tmx"
+    ]
+}

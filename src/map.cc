@@ -7,6 +7,7 @@ extern DebugInfo debugInfo;
 TileMap::TileMap()
 {
     map = new Map();
+    spownPoint = { 0 };
     *map = LoadTiled("./assets/map/desert.json");
 }
 TileMap::~TileMap()

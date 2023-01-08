@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="96" nextobjectid="95">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="96" nextobjectid="152">
  <editorsettings>
   <export target="desert.json" format="json"/>
  </editorsettings>
@@ -9,25 +9,25 @@
   </imagelayer>
  </group>
  <group id="87" name="rocks">
-  <imagelayer id="53" name="rocks" offsetx="297.06" offsety="316.958">
+  <imagelayer id="53" name="rocks" offsetx="294.56" offsety="317.458">
    <image source="rocks.png" width="14" height="9"/>
   </imagelayer>
-  <imagelayer id="54" name="rocks的副本" offsetx="179.636" offsety="329.455">
+  <imagelayer id="54" name="rocks的副本" offsetx="179.136" offsety="330.557">
    <image source="rocks.png" width="14" height="9"/>
   </imagelayer>
   <imagelayer id="55" name="rocks的副本的副本" offsetx="266.545" offsety="336">
    <image source="rocks.png" width="14" height="9"/>
   </imagelayer>
-  <imagelayer id="59" name="rocks1" offsetx="244.182" offsety="303.091">
+  <imagelayer id="59" name="rocks1" offsetx="243.432" offsety="302.841">
    <image source="rocks1.png" width="7" height="5"/>
   </imagelayer>
-  <imagelayer id="65" name="rocks1的副本" offsetx="305" offsety="277">
+  <imagelayer id="65" name="rocks1的副本" offsetx="309.034" offsety="278.966">
    <image source="rocks1.png" width="7" height="5"/>
   </imagelayer>
-  <imagelayer id="66" name="rocks2" offsetx="284.364" offsety="289.455">
+  <imagelayer id="66" name="rocks2" offsetx="279.864" offsety="288.205">
    <image source="rocks2.png" width="4" height="2"/>
   </imagelayer>
-  <imagelayer id="67" name="rocks2的副本" offsetx="194.727" offsety="332.182">
+  <imagelayer id="67" name="rocks2的副本" offsetx="197.602" offsety="332.307">
    <image source="rocks2.png" width="4" height="2"/>
   </imagelayer>
   <imagelayer id="68" name="rocks2的副本的副本" offsetx="279.455" offsety="352">
@@ -57,7 +57,7 @@
   <imagelayer id="61" name="rocks1的副本的副本" offsetx="199.818" offsety="370.909">
    <image source="rocks1.png" width="7" height="5"/>
   </imagelayer>
-  <imagelayer id="62" name="rocks1的副本的副本的副本" offsetx="173.636" offsety="319.818">
+  <imagelayer id="62" name="rocks1的副本的副本的副本" offsetx="176.454" offsety="325">
    <image source="rocks1.png" width="7" height="5"/>
   </imagelayer>
  </group>
@@ -106,7 +106,7 @@
   </imagelayer>
  </group>
  <group id="89" name="grass">
-  <imagelayer id="22" name="grass" offsetx="193.75" offsety="328">
+  <imagelayer id="22" name="grass" offsetx="176.75" offsety="333.455">
    <image source="grass1.png" width="12" height="7"/>
   </imagelayer>
   <imagelayer id="23" name="grass.1" offsetx="243" offsety="319.25">
@@ -121,7 +121,7 @@
   <imagelayer id="26" name="grass1.1" offsetx="291.25" offsety="320">
    <image source="grass2.png" width="12" height="7"/>
   </imagelayer>
-  <imagelayer id="27" name="grass2" offsetx="175.898" offsety="331.307">
+  <imagelayer id="27" name="grass2" offsetx="160.262" offsety="338.307">
    <image source="grass3.png" width="9" height="6"/>
   </imagelayer>
   <imagelayer id="49" name="grass3" offsetx="216.386" offsety="316.227">
@@ -164,7 +164,7 @@
   <imagelayer id="56" name="grass4的副本" offsetx="257.136" offsety="342.455">
    <image source="grass3.png" width="9" height="6"/>
   </imagelayer>
-  <imagelayer id="64" name="grass1的副本" offsetx="163.131" offsety="322.606">
+  <imagelayer id="64" name="grass1的副本" offsetx="160.495" offsety="326.061">
    <image source="grass2.png" width="12" height="7"/>
   </imagelayer>
  </group>
@@ -201,6 +201,61 @@
   <object id="51" name="collision" x="181.902" y="385.124" width="6.022" height="2.44839"/>
   <object id="52" name="collision" x="195.818" y="403.272" width="13.8535" height="11.8017"/>
   <object id="53" name="collision" x="285.037" y="390.22" width="43.5625" height="5.46964"/>
+  <object id="95" name="collision" x="208.086" y="414.57" width="4.41872" height="8.27996"/>
+  <object id="96" name="collision" x="241.166" y="403.11" width="4.41872" height="11.3425"/>
+  <object id="97" name="collision" x="244.353" y="393.079" width="4.41872" height="11.3425"/>
+  <object id="98" name="collision" x="241.416" y="422.891" width="4.41872" height="8.4675"/>
+  <object id="99" name="collision" x="244.291" y="412.204" width="4.41872" height="11.3425"/>
+  <object id="100" name="collision" x="244.166" y="431.079" width="4.41872" height="30.7175"/>
+  <object id="101" name="collision" x="200.916" y="421.891" width="7.85622" height="9.655"/>
+  <object id="102" name="collision" x="191.447" y="423.923" width="9.66872" height="9.655"/>
+  <object id="103" name="collision" x="181.666" y="429.923" width="9.66872" height="9.655"/>
+  <object id="104" name="collision" x="172.791" y="434.735" width="9.66872" height="9.655"/>
+  <object id="105" name="collision" x="163.853" y="439.735" width="9.66872" height="9.655"/>
+  <object id="106" name="collision" x="163.603" y="479.298" width="9.29372" height="3.3425"/>
+  <object id="107" name="collision" x="172.103" y="475.016" width="10.9812" height="4.0925"/>
+  <object id="108" name="collision" x="182.072" y="471.329" width="8.6687" height="4.0925"/>
+  <object id="109" name="collision" x="190.103" y="466.329" width="10.8562" height="5.905"/>
+  <object id="110" name="collision" x="200.197" y="461.048" width="44.3562" height="5.905"/>
+  <object id="111" name="collision" x="151.838" y="386.042" width="6.86163" height="1.94848"/>
+  <object id="112" name="collision" x="159.439" y="388.091" width="3.7312" height="1.42674"/>
+  <object id="113" name="collision" x="156.96" y="387.091" width="3.7312" height="1.38326"/>
+  <object id="114" name="collision" x="141.178" y="372.069" width="3.7312" height="6.77457"/>
+  <object id="115" name="collision" x="144.613" y="379.091" width="2.16598" height="1.905"/>
+  <object id="116" name="collision" x="146.83" y="381.091" width="2.16598" height="1.905"/>
+  <object id="117" name="collision" x="148.743" y="382.961" width="2.16598" height="1.905"/>
+  <object id="118" name="collision" x="150.308" y="384.7" width="2.16598" height="1.905"/>
+  <object id="119" name="collision" x="137.059" y="371.055" width="4.94723" height="1.905"/>
+  <object id="120" name="collision" x="132.011" y="370.048" width="4.94723" height="1.905"/>
+  <object id="121" name="collision" x="145.526" y="323.866" width="2.31087" height="5.17773"/>
+  <object id="122" name="collision" x="144.208" y="330.047" width="2.31087" height="5.17773"/>
+  <object id="123" name="collision" x="142.026" y="336.32" width="2.31087" height="5.17773"/>
+  <object id="124" name="collision" x="139.663" y="342.684" width="2.31087" height="5.17773"/>
+  <object id="125" name="collision" x="137.663" y="349.138" width="2.31087" height="5.17773"/>
+  <object id="126" name="collision" x="134.935" y="354.684" width="2.31087" height="5.17773"/>
+  <object id="127" name="collision" x="133.39" y="360.047" width="2.31087" height="5.17773"/>
+  <object id="128" name="collision" x="131.845" y="364.502" width="2.31087" height="5.17773"/>
+  <object id="129" name="collision" x="146.97" y="318.192" width="2.31087" height="5.17773"/>
+  <object id="130" name="collision" x="148.595" y="312.786" width="2.31087" height="5.17773"/>
+  <object id="131" name="collision" x="152.22" y="303.474" width="3.71712" height="2.77148"/>
+  <object id="132" name="collision" x="151.22" y="307.161" width="2.31087" height="5.17773"/>
+  <object id="133" name="collision" x="155.985" y="301.114" width="4.40462" height="2.77148"/>
+  <object id="134" name="collision" x="160.048" y="299.364" width="4.40462" height="2.77148"/>
+  <object id="135" name="collision" x="164.829" y="298.927" width="4.40462" height="2.77148"/>
+  <object id="136" name="collision" x="168.798" y="297.896" width="4.40462" height="2.77148"/>
+  <object id="137" name="collision" x="172.954" y="296.271" width="4.40462" height="2.77148"/>
+  <object id="138" name="collision" x="176.891" y="295.364" width="4.40462" height="2.77148"/>
+  <object id="139" name="collision" x="181.048" y="294.989" width="4.40462" height="2.77148"/>
+  <object id="140" name="collision" x="185.173" y="293.396" width="4.40462" height="2.77148"/>
+  <object id="141" name="collision" x="189.61" y="292.146" width="4.40462" height="2.77148"/>
+  <object id="142" name="collision" x="194.204" y="290.864" width="4.40462" height="2.77148"/>
+  <object id="143" name="collision" x="198.735" y="289.458" width="4.40462" height="2.77148"/>
+  <object id="144" name="collision" x="203.11" y="288.708" width="4.40462" height="2.77148"/>
+  <object id="145" name="collision" x="207.516" y="287.739" width="4.40462" height="2.77148"/>
+  <object id="146" name="collision" x="211.891" y="286.458" width="4.40462" height="2.77148"/>
+  <object id="147" name="collision" x="216.016" y="285.708" width="4.40462" height="2.77148"/>
+  <object id="148" name="collision" x="218.673" y="284.083" width="4.40462" height="2.77148"/>
+  <object id="149" name="collision" x="223.204" y="281.333" width="8.40462" height="2.77148"/>
  </objectgroup>
  <objectgroup id="75" name="tree">
   <object id="55" name="tree" x="162.514" y="326.023" width="17.1739" height="5.30435"/>
@@ -218,7 +273,7 @@
   <object id="65" name="g-r" x="170.966" y="359.733" width="3.0625" height="1.75"/>
   <object id="68" name="g-r" x="182.086" y="333.08" width="8.5" height="4.25"/>
   <object id="69" name="g-r" x="197.193" y="332.295" width="6" height="2.4375"/>
-  <object id="71" name="g-r" x="245.022" y="377.178" width="2.11111" height="0.888889"/>
+  <object id="71" name="g-r" x="242.741" y="373.303" width="2.11111" height="0.888889"/>
   <object id="72" name="g-r" x="280.856" y="352.606" width="7.2" height="1.2"/>
   <object id="74" name="g-r" x="303.541" y="363.276" width="5.37778" height="2.53333"/>
   <object id="79" name="g-r" x="298.063" y="323.313" width="7.6875" height="4.3125"/>

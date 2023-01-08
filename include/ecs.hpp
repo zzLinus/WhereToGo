@@ -1,4 +1,5 @@
 #include "Renderer.hpp"
+#include "ShaderManager.hpp"
 #include "cam.hpp"
 #include "map.hpp"
 #include "mover.hpp"
@@ -13,6 +14,7 @@ public:
     void add_movers(Mover* m);
     void render_component(void);
     void update_component(void);
+    void init(void);
     Mover* get_player(void);
     static Renderer* get_renderer(void)
     {
@@ -33,6 +35,7 @@ public:
     TileMap* p_tm;
     Player* p_player;
     Cam* p_cam;
+    ShaderManager* p_sdrManager;
     std::vector<Mover*> movers;
 
 private:

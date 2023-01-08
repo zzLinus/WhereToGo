@@ -23,6 +23,7 @@ void Game::Init()
 void Game::Run()
 {
     SetTargetFPS(60);
+    ecs->init();
     while (!WindowShouldClose()) {
         ecs->update_component();
         BeginDrawing();
