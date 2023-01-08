@@ -1,4 +1,5 @@
 #include "Game.hpp"
+
 #include <iostream>
 
 #ifdef DEBUG
@@ -7,34 +8,40 @@ DebugInfo debugInfo = DebugInfo::enable;
 DebugInfo debugInfo = DebugInfo::disable;
 #endif
 
-Game::Game()
-    : ecs(nullptr)
+Game::Game() : ecs(nullptr)
 {
 }
 
 void Game::Init()
 {
-    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Where To Go");
-    // NOTE: Load the texture after calling InitWindow. Textures require a valid OpenGL context.
+  InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Where To Go");
+  // NOTE: Load the texture after calling InitWindow. Textures require a valid OpenGL context.
 
-    InitEntity();
+  InitEntity();
 }
 
 void Game::Run()
 {
-    SetTargetFPS(60);
-    ecs->init();
-    while (!WindowShouldClose()) {
-        ecs->update_component();
-        BeginDrawing();
+  SetTargetFPS(60);
+  ecs->init();
+  while (!WindowShouldClose())
+  {
+    ecs->update_component();
+    BeginDrawing();
 
-        // render && player with camera2D cordinate
-        ecs->render_component();
+    // render && player with camera2D cordinate
+    ecs->render_component();
 
-        EndDrawing();
-    }
+    EndDrawing();
+  }
 }
 
-void Game::InitEntity() { ecs = new Ecs(); }
+void Game::InitEntity()
+{
+  ecs = new Ecs();
+}
 
-Game::~Game() { delete ecs; };
+Game::~Game()
+{
+  delete ecs;
+};

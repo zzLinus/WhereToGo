@@ -70,7 +70,7 @@ void main()
 
     // Right hand side of screen is dimly lit,
     // could make the threshold value user definable
-    if (alpha > 0.9) alpha = 0.9;
+    if (alpha > 0.7) alpha = 0.7;
 
     // could make the black out colour user definable...
     gl_FragColor = vec4(0, 0, 0, alpha);

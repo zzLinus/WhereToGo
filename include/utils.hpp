@@ -1,6 +1,7 @@
 #pragma once
 
-enum class DebugInfo {
-    enable = true,
-    disable = false,
+enum class DebugInfo
+{
+  enable = true,
+  disable = false,
 };

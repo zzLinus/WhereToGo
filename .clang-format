@@ -1,15 +1,24 @@
 ---
-Language: Cpp
-BasedOnStyle: WebKit
-SpaceAfterTemplateKeyword: false
-AlignEscapedNewlines: Left
-ColumnLimit: 110
-AlignTrailingComments: true
-BreakBeforeInheritanceComma: true
-BreakConstructorInitializers: BeforeComma
-IndentPPDirectives: AfterHash
-BreakBeforeBraces: Custom
-BraceWrapping:
-    AfterFunction: true
-NamespaceIndentation: None
-QualifierAlignment: Left
+BasedOnStyle: Google
+AlignAfterOpenBracket: 'AlwaysBreak'
+AllowAllConstructorInitializersOnNextLine: 'false'
+AllowAllParametersOfDeclarationOnNextLine: 'false'
+AlignConsecutiveMacros: 'true'
+AllowShortCaseLabelsOnASingleLine: 'true'
+AllowShortFunctionsOnASingleLine: 'None'
+AllowShortIfStatementsOnASingleLine: 'Never'
+AllowShortLoopsOnASingleLine: 'false'
+BreakBeforeBraces: Allman
+BinPackArguments: 'false'
+BinPackParameters: 'false'
+Cpp11BracedListStyle: 'false'
+ColumnLimit: 125 
+NamespaceIndentation: All
+SpaceAfterTemplateKeyword: 'false'
+SpaceBeforeCtorInitializerColon: 'true'
+SpaceBeforeInheritanceColon: 'true'
+SpaceBeforeParens: ControlStatements
+SpaceBeforeRangeBasedForLoopColon: 'true'
+SpaceInEmptyBlock: true
+Standard: 'Latest'
+...

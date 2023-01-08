@@ -1,21 +1,23 @@
-#include "ecs.hpp"
-#include "utils.hpp"
 #include <raylib.h>
 #include <raymath.h>
 
-class Game {
-public:
-    Game();
-    virtual ~Game();
-    void Run();
-    void InitEntity();
-    void Init();
+#include "ecs.hpp"
+#include "utils.hpp"
 
-private:
-public:
-    // global const here
+class Game
+{
+ public:
+  Game();
+  virtual ~Game();
+  void Run();
+  void InitEntity();
+  void Init();
 
-private:
-    float deltaTime;
-    Ecs* ecs;
+ private:
+ public:
+  // global const here
+
+ private:
+  float deltaTime;
+  Ecs* ecs;
 };
