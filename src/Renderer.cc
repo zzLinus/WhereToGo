@@ -217,6 +217,11 @@ void Renderer::Render_NORM(void)
         DrawTexturePro(
             rdobj.m_texture, rdobj.m_source, rdobj.m_dest, Vector2{ rdobj.vec4.x, rdobj.vec4.x }, rdobj.vec4.z, rdobj.color);
         break;
+      case RECT:
+      {
+        DrawRectangle(rdobj.m_source.x, rdobj.m_source.y, rdobj.m_source.width, rdobj.m_source.height, rdobj.color);
+        break;
+      }
       case TEXTURERECT: break;
       case RECTREC: break;
       case RECTLINEEX: break;

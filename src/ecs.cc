@@ -82,11 +82,11 @@ void Ecs::render_component(void)
   get_renderer()->Render_2D_colli();
   EndMode2D();
 
+  get_renderer()->Render_NORM();
   BeginShaderMode(*p_sdrManager->shader);
   DrawRectangle(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, WHITE);
   EndShaderMode();
 
-  get_renderer()->Render_NORM();
   if (debugInfo)
     DrawFPS(SCREEN_WIDTH - 100, 30);
 }

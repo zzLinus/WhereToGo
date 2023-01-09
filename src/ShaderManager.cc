@@ -12,7 +12,7 @@ ShaderManager::ShaderManager()
   for (int m = 0; m < SCREEN_WIDTH / 2.0; m++)
   {
     for (int n = 0; n < MAX_STARS; n++)
-      stars[n].Update();
+      stars[n].Update(Vector2{ 400, 300 });
   }
 
   shader = new Shader(LoadShader(0, "resources/fs_spotlight.glsl"));
@@ -62,14 +62,14 @@ ShaderManager::~ShaderManager()
 void ShaderManager::upload_drawable(Camera2D& cam)
 {
   for (int n = 0; n < MAX_STARS; n++)
-    stars[n].Update();
+    stars[n].Update(Vector2{ 400, 300 });
 
   for (int n = 0; n < MAX_STARS; n++)
   {
     RenderObject* rdobj;
     // NOTE :Single pixel is just too small these days!
-    rdobj = new RenderObject((int)stars[n].pos.x, (int)stars[n].pos.y, 1, 1, WHITE, RECT);
-    p_renderer->add_renderObj(rdobj, RENDER_2D);
+    rdobj = new RenderObject((int)stars[n].pos.x, (int)stars[n].pos.y, 4, 4, Color{ 255, 243, 0, 255 }, RECT);
+    p_renderer->add_renderObj(rdobj, RENDER_NOR);
     delete rdobj;
   }
 

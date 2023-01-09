@@ -8,31 +8,44 @@
 #include "types.hpp"
 
 #define MAX_SPOTS 1  // NOTE: It must be the same as define in shader
-#define MAX_STARS 400
+#define MAX_STARS 50
 
 typedef struct Star Star;
 struct Star
 {
   Vector2 pos;
   Vector2 vel;
+  Vector2 lifeTime;
   void Reset()
   {
-    pos = (Vector2){ GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f };
+    pos.x = GetRandomValue(0, SCREEN_WIDTH);
+    pos.y = GetRandomValue(0, SCREEN_HEIGHT);
 
     do
     {
-      vel.x = (float)GetRandomValue(-1000, 1000) / 100.0f;
-      vel.y = (float)GetRandomValue(-1000, 1000) / 100.0f;
+      vel.x = (float)GetRandomValue(-1000, 1000) / 400.0f;
+      vel.y = (float)GetRandomValue(-1000, 1000) / 400.0f;
 
     } while (!(fabs(vel.x) + (fabs(vel.y) > 1)));
 
-    pos = Vector2Add(pos, Vector2Multiply(vel, (Vector2){ 8.0f, 8.0f }));
-  }
-  void Update()
-  {
     pos = Vector2Add(pos, vel);
+    lifeTime = { 50, 0 };
+  }
+  void Update(Vector2 __pos)
+  {
+    if (GetRandomValue(0, 3) != 0)
+      return;
+    if (GetRandomValue(0, 1) == 0)
+      pos = Vector2Add(pos, Vector2{ 0, vel.y });
+    else
+      pos = Vector2Add(pos, Vector2{ 0, -vel.y });
 
-    if ((pos.x < 0) || (pos.x > GetScreenWidth()) || (pos.y < 0) || (pos.y > GetScreenHeight()))
+    if (GetRandomValue(0, 1) == 0)
+      pos = Vector2Add(pos, Vector2{ vel.x, 0 });
+    else
+      pos = Vector2Add(pos, Vector2{ -vel.x, 0 });
+
+    if ((pos.x < 0) || (pos.x > GetScreenWidth()) || (pos.y < 0) || (pos.y > GetScreenHeight()) || !((int)--lifeTime.x))
     {
       Reset();
     }
