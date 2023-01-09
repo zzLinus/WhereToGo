@@ -19,6 +19,7 @@ class Player : public Mover
   void upload_hud_drawobj(void) override;
   void handle_keyboard(void) override;
   void attack(void);
+  Vector2 get_center(void);
   bool load_assets(void);
   bool is_player_attacking(void);
 

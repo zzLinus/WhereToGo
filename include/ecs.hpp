@@ -17,11 +17,16 @@ class Ecs
   void render_component(void);
   void update_component(void);
   void init(void);
-  Mover* get_player(void);
   static Renderer* get_renderer(void)
   {
     static Renderer renderer;
     return &renderer;
+  }
+
+  Player* get_player(void)
+  {
+    static Player player(Vector2{ 163.0f, 439.0f }, Ecs::get_renderer());
+    return &player;
   }
 
   // TODO: move collison physics here
@@ -34,8 +39,9 @@ class Ecs
   void update_deltaTime(float dt);
 
  public:
+  static Player* p_player;
+
   TileMap* p_tm;
-  Player* p_player;
   Cam* p_cam;
   ShaderManager* p_sdrManager;
   std::vector<Mover*> movers;

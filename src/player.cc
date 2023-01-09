@@ -221,3 +221,11 @@ bool Player::load_assets()
 
   return true;
 }
+
+Vector2 Player::get_center(void)
+{
+  return Vector2Add(
+      Vector2{ (float)m_animSprites[m_curState].m_frameRect.width / 2,
+               (float)m_animSprites[m_curState].m_frameRect.height / 2 },
+      m_position);
+}

@@ -5,6 +5,9 @@ Renderer* AnimSprite::p_renderer = Ecs::get_renderer();
 Renderer* TileMap::p_renderer = Ecs::get_renderer();
 Renderer* ShaderManager::p_renderer = Ecs::get_renderer();
 
+// NOTE :for linkage usage
+Player* Ecs::p_player;
+
 Ecs::Ecs() : p_tm(nullptr), p_cam(nullptr), deltaTime(0)
 {
   p_tm = new TileMap();
@@ -51,8 +54,9 @@ void Ecs::update_movers(void)
 void Ecs::init()
 {
   upload_mapDrawable();
-  p_player = new Player(Vector2{ 163.0f, 439.0f }, Ecs::get_renderer());
+  p_player = get_player();
   add_movers(p_player);
+  ShaderManager::p_playerPos = Ecs::get_player()->m_position;
 }
 
 void Ecs::upload_mapDrawable()
@@ -76,13 +80,13 @@ void Ecs::render_component(void)
   get_renderer()->Render_2D_bg();
   get_renderer()->Render_2D();
   get_renderer()->Render_2D_colli();
-
   EndMode2D();
-  get_renderer()->Render_NORM();
 
   BeginShaderMode(*p_sdrManager->shader);
   DrawRectangle(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, WHITE);
   EndShaderMode();
+
+  get_renderer()->Render_NORM();
   if (debugInfo)
     DrawFPS(SCREEN_WIDTH - 100, 30);
 }
@@ -90,7 +94,10 @@ void Ecs::render_component(void)
 void Ecs::update_component()
 {
   update_deltaTime(GetFrameTime());
-  p_sdrManager->upload_drawable();
+
+  ShaderManager::p_playerPos = Ecs::get_player()->get_center();
+  p_sdrManager->upload_drawable(p_cam->cam);
+
   update_movers();
   update_cam();
 }

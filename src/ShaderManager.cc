@@ -1,5 +1,7 @@
 #include "ShaderManager.hpp"
 
+Vector2 ShaderManager::p_playerPos;
+
 ShaderManager::ShaderManager()
 {
   for (int n = 0; n < MAX_STARS; n++)
@@ -43,7 +45,7 @@ ShaderManager::ShaderManager()
     }
 
     spots[i].inner = 28.0f * (i + 1);
-    spots[i].radius = 60.0f * (i + 1);
+    spots[i].radius = 260.0f * (i + 1);
 
     SetShaderValue(*shader, spots[i].posLoc, &spots[i].pos.x, SHADER_UNIFORM_VEC2);
     SetShaderValue(*shader, spots[i].innerLoc, &spots[i].inner, SHADER_UNIFORM_FLOAT);
@@ -57,7 +59,7 @@ ShaderManager::~ShaderManager()
   delete shader;
 }
 
-void ShaderManager::upload_drawable()
+void ShaderManager::upload_drawable(Camera2D& cam)
 {
   for (int n = 0; n < MAX_STARS; n++)
     stars[n].Update();
@@ -75,7 +77,8 @@ void ShaderManager::upload_drawable()
   {
     if (i == 0)
     {
-      Vector2 mp = GetMousePosition();
+      Vector2 mp = GetWorldToScreen2D(p_playerPos, cam);
+      // Vector2 mp = GetMousePosition();
       spots[i].pos.x = mp.x;
       spots[i].pos.y = SCREEN_HEIGHT - mp.y;
     }
