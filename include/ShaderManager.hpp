@@ -75,7 +75,7 @@ class ShaderManager
   Star stars[MAX_STARS];
   Spot spots[MAX_SPOTS];
 
-  Shader shader;
+  Shader* shader;
   static Renderer* p_renderer;
 
  private:

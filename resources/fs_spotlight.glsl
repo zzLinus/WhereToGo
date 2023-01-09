@@ -1,6 +1,13 @@
-#version 100
+#version 330
 
-precision mediump float;
+// Input vertex attributes (from vertex shader)
+in vec2 fragTexCoord;
+in vec4 fragColor;
+
+// Output fragment color
+out vec4 finalColor;
+
+// NOTE: Add here your custom variables
 
 #define MAX_SPOTS   3
 
@@ -10,8 +17,8 @@ struct Spot {
     float radius;    // alpha fades out to this radius
 };
 
-uniform Spot spots[MAX_SPOTS];  // Spotlight positions array
-uniform float screenWidth;      // Width of the screen
+uniform Spot spots[MAX_SPOTS];      // Spotlight positions array
+uniform float screenWidth;          // Width of the screen
 
 void main()
 {
@@ -21,8 +28,8 @@ void main()
     vec2 pos = vec2(gl_FragCoord.x, gl_FragCoord.y);
 
     // Find out which spotlight is nearest
-    float d = 65000.0;  // some high value
-    int fi = -1;        // found index
+    float d = 65000;  // some high value
+    int fi = -1;      // found index
 
     for (int i = 0; i < MAX_SPOTS; i++)
     {
@@ -40,38 +47,24 @@ void main()
 
     // d now equals distance to nearest spot...
     // allowing for the different radii of all spotlights
-    if (fi == 0)
+    if (fi != -1)
     {
-        if (d > spots[0].radius) alpha = 1.0;
-        else
-        {
-            if (d < spots[0].inner) alpha = 0.0;
-            else alpha = (d - spots[0].inner)/(spots[0].radius - spots[0].inner);
-        }
-    }
-    else if (fi == 1)
-    {
-        if (d > spots[1].radius) alpha = 1.0;
-        else
-        {
-            if (d < spots[1].inner) alpha = 0.0;
-            else alpha = (d - spots[1].inner)/(spots[1].radius - spots[1].inner);
-        }
-    }
-    else if (fi == 2)
-    {
-        if (d > spots[2].radius) alpha = 1.0;
-        else
-        {
-            if (d < spots[2].inner) alpha = 0.0;
-            else alpha = (d - spots[2].inner)/(spots[2].radius - spots[2].inner);
+			if (d > spots[fi].radius)
+			{
+				alpha = 1.0;
+			}
+			else
+			{
+					if (d < spots[fi].inner) alpha = 0.0;
+					/* else alpha = (d - spots[fi].inner) / (spots[fi].radius - spots[fi].inner); */
+					else alpha = (d - spots[fi].inner) / (spots[fi].radius - spots[fi].inner + 1);
         }
     }
 
-    // Right hand side of screen is dimly lit,
-    // could make the threshold value user definable
-    if (alpha > 0.7) alpha = 0.7;
+    /* // Right hand side of screen is dimly lit, */
+    /* // could make the threshold value user definable */
+    if (alpha > 0.9) alpha = 0.9;
 
-    // could make the black out colour user definable...
-    gl_FragColor = vec4(0, 0, 0, alpha);
+
+    finalColor = vec4(0, 0, 0, alpha);
 }

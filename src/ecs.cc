@@ -80,7 +80,7 @@ void Ecs::render_component(void)
   EndMode2D();
   get_renderer()->Render_NORM();
 
-  BeginShaderMode(p_sdrManager->shader);
+  BeginShaderMode(*p_sdrManager->shader);
   DrawRectangle(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, WHITE);
   EndShaderMode();
   if (debugInfo)
