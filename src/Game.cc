@@ -29,6 +29,9 @@ void Game::Run()
     ecs->update_component();
     BeginDrawing();
 
+    // NOTE :upload drawable
+    ecs->upload_drawable();
+
     // render && player with camera2D cordinate
     ecs->render_component();
 

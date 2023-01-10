@@ -4,16 +4,8 @@ Vector2 ShaderManager::p_playerPos;
 
 ShaderManager::ShaderManager()
 {
-  for (int n = 0; n < MAX_STARS; n++)
-    stars[n].Reset();
   for (int n = 0; n < MAX_SPOTS; n++)
     spots[n].Reset();
-
-  for (int m = 0; m < SCREEN_WIDTH / 2.0; m++)
-  {
-    for (int n = 0; n < MAX_STARS; n++)
-      stars[n].Update(Vector2{ 400, 300 });
-  }
 
   shader = new Shader(LoadShader(0, "resources/fs_spotlight.glsl"));
 
@@ -59,20 +51,8 @@ ShaderManager::~ShaderManager()
   delete shader;
 }
 
-void ShaderManager::upload_drawable(Camera2D& cam)
+void ShaderManager::update_Shaders(Camera2D& cam)
 {
-  for (int n = 0; n < MAX_STARS; n++)
-    stars[n].Update(cam.target);
-
-  for (int n = 0; n < MAX_STARS; n++)
-  {
-    RenderObject* rdobj;
-    // NOTE :Single pixel is just too small these days!
-    rdobj = new RenderObject((int)stars[n].pos.x, (int)stars[n].pos.y, 1, 1, Color{ 255, 243, 0, 255 }, RECT);
-    p_renderer->add_renderObj(rdobj, RENDER_2D_PATIC);
-    delete rdobj;
-  }
-
   for (int i = 0; i < MAX_SPOTS; i++)
   {
     if (i == 0)

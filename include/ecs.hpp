@@ -1,5 +1,6 @@
 #include <vector>
 
+#include "ParticleSystem.hpp"
 #include "Renderer.hpp"
 #include "ShaderManager.hpp"
 #include "cam.hpp"
@@ -16,6 +17,7 @@ class Ecs
   void add_movers(Mover* m);
   void render_component(void);
   void update_component(void);
+  void upload_drawable(void);
   void init(void);
   static Renderer* get_renderer(void)
   {
@@ -41,9 +43,11 @@ class Ecs
  public:
   static Player* p_player;
 
+  ShaderManager* p_sdrManager;
+  ParticleSystem* p_particleSystem;
   TileMap* p_tm;
   Cam* p_cam;
-  ShaderManager* p_sdrManager;
+
   std::vector<Mover*> movers;
 
  private:

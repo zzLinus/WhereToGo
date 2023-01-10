@@ -3,7 +3,7 @@ extern bool debugInfo;
 
 Renderer* AnimSprite::p_renderer = Ecs::get_renderer();
 Renderer* TileMap::p_renderer = Ecs::get_renderer();
-Renderer* ShaderManager::p_renderer = Ecs::get_renderer();
+Renderer* ParticleSystem::p_renderer = Ecs::get_renderer();
 
 // NOTE :for linkage usage
 Player* Ecs::p_player;
@@ -13,6 +13,7 @@ Ecs::Ecs() : p_tm(nullptr), p_cam(nullptr), deltaTime(0)
   p_tm = new TileMap();
   p_cam = new Cam();
   p_sdrManager = new ShaderManager();
+  p_particleSystem = new ParticleSystem();
 }
 Ecs::~Ecs()
 {
@@ -23,6 +24,7 @@ Ecs::~Ecs()
   delete p_tm;
   delete p_cam;
   delete p_sdrManager;
+  delete p_particleSystem;
 }
 
 inline void Ecs::add_movers(Mover* m)
@@ -73,8 +75,7 @@ void Ecs::render_component(void)
 {
   p_tm->get_collisionRects();
   p_tm->check_collision(p_player->m_collisionBox);
-  upload_mapDrawable();
-  mover_drawable_upload();
+
   BeginMode2D(p_cam->cam);
 
   get_renderer()->Render_2D_bg();
@@ -98,8 +99,15 @@ void Ecs::update_component()
   update_deltaTime(GetFrameTime());
 
   ShaderManager::p_playerPos = Ecs::get_player()->get_center();
-  p_sdrManager->upload_drawable(p_cam->cam);
+  p_sdrManager->update_Shaders(p_cam->cam);
 
   update_movers();
   update_cam();
+}
+
+void Ecs::upload_drawable()
+{
+  upload_mapDrawable();
+  mover_drawable_upload();
+  p_particleSystem->upload_drawables(p_cam->cam);
 }
