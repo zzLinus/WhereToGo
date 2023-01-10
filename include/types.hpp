@@ -2,8 +2,8 @@
 #include <raylib.h>
 #include <string.h>
 
-const int SCREEN_WIDTH = 800;
-const int SCREEN_HEIGHT = 600;
+const int SCREEN_WIDTH = 1000;
+const int SCREEN_HEIGHT = 800;
 
 struct Sprite
 {
@@ -29,6 +29,7 @@ enum renderMode
   RENDER_2D = 0,
   RENDER_2D_MOVER,
   RENDER_2D_COLLI,
+  RENDER_2D_PATIC,
   RENDER_2D_BG,
   RENDER_NOR,
 };

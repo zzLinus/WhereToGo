@@ -41,6 +41,11 @@ void Renderer::add_renderObj(RenderObject* renderObj, renderMode rm)
       renderObjs_norm.push_back(*renderObj);
       break;
     }
+    case RENDER_2D_PATIC:
+    {
+      renderObjs_2d_particles.push_back(*renderObj);
+      break;
+    }
     default:
     {
       break;
@@ -289,4 +294,58 @@ void Renderer::Render_2D_colli()
     }
   }
   renderObjs_2d_colli.clear();
+}
+
+void Renderer::Render_2D_particles()
+{
+  for (auto& rdobj : renderObjs_2d_particles)
+  {
+    switch (rdobj.rdt)
+    {
+      case TEXTURE:
+      {
+        DrawTexture(rdobj.m_texture, (int)rdobj.m_source.x, (int)rdobj.m_source.y, rdobj.color);
+        break;
+      }
+      case RECTLINE:
+      {
+        DrawRectangleLines(rdobj.m_source.x, rdobj.m_source.y, rdobj.m_source.width, rdobj.m_source.height, rdobj.color);
+        break;
+      }
+      case TEXT:
+      {
+        DrawText(rdobj.text, (int)rdobj.m_source.x, (int)rdobj.m_source.y, (int)rdobj.m_source.width, rdobj.color);
+        break;
+      }
+      case TEXTUREPRO:
+      {
+        DrawTexturePro(
+            rdobj.m_texture, rdobj.m_source, rdobj.m_dest, Vector2{ rdobj.vec4.x, rdobj.vec4.x }, rdobj.vec4.z, rdobj.color);
+        break;
+      }
+      case TEXTURERECT:
+      {
+        DrawTextureRec(rdobj.m_texture, rdobj.m_source, Vector2{ .x = rdobj.vec4.x, .y = rdobj.vec4.y }, rdobj.color);
+        break;
+      }
+      case RECTREC:
+      {
+        DrawRectangleRec(rdobj.m_source, rdobj.color);
+        break;
+      }
+      case RECT:
+      {
+        DrawRectangle(rdobj.m_source.x, rdobj.m_source.y, rdobj.m_source.width, rdobj.m_source.height, rdobj.color);
+        break;
+      }
+      case RECTLINEEX:
+      {
+        DrawRectangleLinesEx(rdobj.m_source, rdobj.lineThick, rdobj.color);
+        break;
+      }
+      default:;
+    }
+  }
+
+  renderObjs_2d_particles.clear();
 }

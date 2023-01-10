@@ -8,7 +8,7 @@
 #include "types.hpp"
 
 #define MAX_SPOTS 1  // NOTE: It must be the same as define in shader
-#define MAX_STARS 50
+#define MAX_STARS 200
 
 typedef struct Star Star;
 struct Star
@@ -20,32 +20,41 @@ struct Star
   {
     pos.x = GetRandomValue(0, SCREEN_WIDTH);
     pos.y = GetRandomValue(0, SCREEN_HEIGHT);
+    lifeTime = { 50, (float)GetRandomValue(0, 1) };
 
     do
     {
-      vel.x = (float)GetRandomValue(-1000, 1000) / 400.0f;
-      vel.y = (float)GetRandomValue(-1000, 1000) / 400.0f;
+      vel.x = (float)cosf32(0);
+      vel.y = (float)sinf32(0);
 
     } while (!(fabs(vel.x) + (fabs(vel.y) > 1)));
 
     pos = Vector2Add(pos, vel);
-    lifeTime = { 50, 0 };
   }
   void Update(Vector2 __pos)
   {
     if (GetRandomValue(0, 3) != 0)
       return;
-    if (GetRandomValue(0, 1) == 0)
-      pos = Vector2Add(pos, Vector2{ 0, vel.y });
-    else
-      pos = Vector2Add(pos, Vector2{ 0, -vel.y });
 
-    if (GetRandomValue(0, 1) == 0)
-      pos = Vector2Add(pos, Vector2{ vel.x, 0 });
-    else
-      pos = Vector2Add(pos, Vector2{ -vel.x, 0 });
+    if (GetRandomValue(0, 3) != 0)
+    {
+      if ((int)lifeTime.y == 0)
+      {
+        vel.x = (float)sinf32(lifeTime.x / 50 * PI) * 0.8;
+        vel.y = (float)cosf32(lifeTime.x / 50 * PI) * 0.9;
+      }
+      else
+      {
+        vel.x = (float)sinf32(-lifeTime.x / 50 * PI) * 0.8;
+        vel.y = (float)cosf32(-lifeTime.x / 50 * PI) * 0.9;
+      }
+    }
 
-    if ((pos.x < 0) || (pos.x > GetScreenWidth()) || (pos.y < 0) || (pos.y > GetScreenHeight()) || !((int)--lifeTime.x))
+    pos = Vector2Add(pos, vel);
+
+    if ((pos.x < pos.x - (float)GetScreenWidth() / 2) || (pos.x > pos.x + (float)GetScreenWidth() / 2) ||
+        (pos.y < pos.y - (float)GetScreenHeight() / 2) || (pos.y > pos.y + (float)GetScreenHeight() / 2) ||
+        !((int)--lifeTime.x))
     {
       Reset();
     }

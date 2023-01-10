@@ -62,7 +62,7 @@ void main()
 
     /* // Right hand side of screen is dimly lit, */
     /* // could make the threshold value user definable */
-    if (alpha > 0.9) alpha = 0.9;
+    if (alpha > 0.8) alpha = 0.8;
 
 
     finalColor = vec4(0, 0, 0, alpha);

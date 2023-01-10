@@ -80,6 +80,8 @@ void Ecs::render_component(void)
   get_renderer()->Render_2D_bg();
   get_renderer()->Render_2D();
   get_renderer()->Render_2D_colli();
+  get_renderer()->Render_2D_particles();
+
   EndMode2D();
 
   get_renderer()->Render_NORM();

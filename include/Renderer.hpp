@@ -15,6 +15,7 @@ class Renderer
   void Render_2D(void);
   void Render_2D_bg(void);
   void Render_2D_colli(void);
+  void Render_2D_particles(void);
   void Render_NORM(void);
 
  private:
@@ -27,4 +28,5 @@ class Renderer
   std::vector<RenderObject> renderObjs_2d_colli;
   std::vector<RenderObject> renderObjs_norm;
   std::vector<RenderObject> renderObjs_2d_bg;
+  std::vector<RenderObject> renderObjs_2d_particles;
 };
