@@ -4,10 +4,11 @@
 
 #include <iostream>
 
+#include "ParticleSystem.hpp"
 #include "Renderer.hpp"
 #include "types.hpp"
 
-#define MAX_SPOTS 1  // NOTE: It must be the same as define in shader
+#define MAX_SPOTS 21  // NOTE: It must be the same as define in shader
 
 typedef struct Spot Spot;
 struct Spot

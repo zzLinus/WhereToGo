@@ -9,7 +9,7 @@ out vec4 finalColor;
 
 // NOTE: Add here your custom variables
 
-#define MAX_SPOTS 1
+#define MAX_SPOTS 21
 
 struct Spot {
     vec2 pos;        // window coords of spot
@@ -49,21 +49,16 @@ void main()
     // allowing for the different radii of all spotlights
     if (fi != -1)
     {
-			if (d > spots[fi].radius)
-			{
-				alpha = 1.0;
-			}
-			else
-			{
-					if (d < spots[fi].inner) alpha = 0.0;
-					else alpha = (d - spots[fi].inner) / (spots[fi].radius - spots[fi].inner + 1);
+        if (d > spots[fi].radius) alpha = 1.0;
+        else
+        {
+					alpha = (d - spots[fi].inner) / (spots[fi].radius - spots[fi].inner);
         }
     }
 
-    /* // Right hand side of screen is dimly lit, */
-    /* // could make the threshold value user definable */
-    if (alpha > 0.8) alpha = 0.8;
-
+    // Right hand side of screen is dimly lit,
+    // could make the threshold value user definable
+    if (alpha > 0.7) alpha = 0.7;
 
     finalColor = vec4(0, 0, 0, alpha);
 }

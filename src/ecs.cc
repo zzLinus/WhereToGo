@@ -5,15 +5,19 @@ Renderer* AnimSprite::p_renderer = Ecs::get_renderer();
 Renderer* TileMap::p_renderer = Ecs::get_renderer();
 Renderer* ParticleSystem::p_renderer = Ecs::get_renderer();
 
+Vector2 Star::target;
+
 // NOTE :for linkage usage
 Player* Ecs::p_player;
+Cam* Ecs::p_cam;
 
-Ecs::Ecs() : p_tm(nullptr), p_cam(nullptr), deltaTime(0)
+Ecs::Ecs() : p_tm(nullptr), deltaTime(0)
 {
   p_tm = new TileMap();
   p_cam = new Cam();
   p_sdrManager = new ShaderManager();
   p_particleSystem = new ParticleSystem();
+  Star::target = p_cam->cam.target;
 }
 Ecs::~Ecs()
 {
@@ -103,11 +107,13 @@ void Ecs::update_component()
 
   update_movers();
   update_cam();
+
+  Star::target = p_cam->cam.target;
 }
 
 void Ecs::upload_drawable()
 {
   upload_mapDrawable();
   mover_drawable_upload();
-  p_particleSystem->upload_drawables(p_cam->cam);
+  p_particleSystem->upload_drawables();
 }

@@ -22,6 +22,7 @@ enum renderType
   RECT,
   RECTLINEEX,
   RECTREC,
+  CIRCLE,
 };
 
 enum renderMode
@@ -121,6 +122,15 @@ struct RenderObject
   {
     m_source = rect;
     lineThick = lt;
+    color = c;
+    rdt = t;
+    y = m_source.height + m_source.y;
+  }
+  RenderObject(int centerX, int centerY, float r, Color c, renderType t) : RenderObject()  // NOTE : DrawCircle()
+  {
+    m_source.x = (float)centerX;
+    m_source.y = (float)centerY;
+    m_source.width = r;
     color = c;
     rdt = t;
     y = m_source.height + m_source.y;

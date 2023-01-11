@@ -28,16 +28,17 @@ ShaderManager::ShaderManager()
   {
     spots[i].pos.x = (float)GetRandomValue(64, SCREEN_WIDTH - 64);
     spots[i].pos.y = (float)GetRandomValue(64, SCREEN_WIDTH - 64);
-    spots[i].vel = (Vector2){ 0, 0 };
 
-    while ((fabs(spots[i].vel.x) + fabs(spots[i].vel.y)) < 2)
+    if (i == 0)
     {
-      spots[i].vel.x = GetRandomValue(-400, 40) / 10.0f;
-      spots[i].vel.y = GetRandomValue(-400, 40) / 10.0f;
+      spots[i].inner = 0.0f;
+      spots[i].radius = 80.0f;
     }
-
-    spots[i].inner = 28.0f * (i + 1);
-    spots[i].radius = 260.0f * (i + 1);
+    else
+    {
+      spots[i].inner = 0.0f;
+      spots[i].radius = 15.0f;
+    }
 
     SetShaderValue(*shader, spots[i].posLoc, &spots[i].pos.x, SHADER_UNIFORM_VEC2);
     SetShaderValue(*shader, spots[i].innerLoc, &spots[i].inner, SHADER_UNIFORM_FLOAT);
@@ -60,21 +61,14 @@ void ShaderManager::update_Shaders(Camera2D& cam)
       Vector2 mp = GetWorldToScreen2D(p_playerPos, cam);
       // Vector2 mp = GetMousePosition();
       spots[i].pos.x = mp.x;
-      spots[i].pos.y = SCREEN_HEIGHT - mp.y;
+      spots[i].pos.y = GetScreenHeight() - mp.y;
     }
     else
     {
-      spots[i].pos.x += spots[i].vel.x;
-      spots[i].pos.y += spots[i].vel.y;
-
-      if (spots[i].pos.x < 64)
-        spots[i].vel.x = -spots[i].vel.x;
-      if (spots[i].pos.x > (SCREEN_WIDTH - 64))
-        spots[i].vel.x = -spots[i].vel.x;
-      if (spots[i].pos.y < 64)
-        spots[i].vel.y = -spots[i].vel.y;
-      if (spots[i].pos.y > (SCREEN_HEIGHT - 64))
-        spots[i].vel.y = -spots[i].vel.y;
+      Vector2 mp = GetWorldToScreen2D(ParticleSystem::stars[i - 1].pos, cam);
+      // Vector2 mp = GetMousePosition();
+      spots[i].pos.x = mp.x;
+      spots[i].pos.y = GetScreenHeight() - mp.y;
     }
 
     SetShaderValue(*shader, spots[i].posLoc, &spots[i].pos.x, SHADER_UNIFORM_VEC2);

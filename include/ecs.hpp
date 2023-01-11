@@ -46,7 +46,7 @@ class Ecs
   ShaderManager* p_sdrManager;
   ParticleSystem* p_particleSystem;
   TileMap* p_tm;
-  Cam* p_cam;
+  static Cam* p_cam;
 
   std::vector<Mover*> movers;
 

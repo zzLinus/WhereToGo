@@ -343,6 +343,11 @@ void Renderer::Render_2D_particles()
         DrawRectangleLinesEx(rdobj.m_source, rdobj.lineThick, rdobj.color);
         break;
       }
+      case CIRCLE:
+      {
+        DrawCircle(rdobj.m_source.x, rdobj.m_source.y, rdobj.m_source.width, rdobj.color);
+        break;
+      }
       default:;
     }
   }
