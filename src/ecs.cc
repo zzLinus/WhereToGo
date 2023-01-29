@@ -89,10 +89,23 @@ void Ecs::render_component(void)
 
   EndMode2D();
 
+  RenderTexture2D fogOfWar = LoadRenderTexture(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+  SetTextureFilter(fogOfWar.texture, TEXTURE_FILTER_BILINEAR);
+
+  BeginTextureMode(fogOfWar);
+  DrawRectangle(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, Fade(BLACK, 1));
+  DrawCircle(400, 300, 50, WHITE);
+  EndTextureMode();
+
+  DrawTexture(fogOfWar.texture, 0, 0, Fade(WHITE, 1));
+
   get_renderer()->Render_NORM();
+
   BeginShaderMode(*p_sdrManager->shader);
   DrawRectangle(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, WHITE);
   EndShaderMode();
+
+  UnloadRenderTexture(fogOfWar);  // Unload render texture
 
   if (debugInfo)
     DrawFPS(SCREEN_WIDTH - 100, 30);

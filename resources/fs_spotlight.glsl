@@ -60,5 +60,5 @@ void main()
     // could make the threshold value user definable
     if (alpha > 0.7) alpha = 0.7;
 
-    finalColor = vec4(0, 0, 0, alpha);
+    finalColor = vec4(0, 0, 0, 0);
 }
