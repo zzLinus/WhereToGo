@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_eEQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDEBUG")
-set(PLATFORM PLATFORM_DESKTOP)
+set(PLATFORM Desktop)
 set(PLATFORM_OS LINUX)
 
 # This is the main part:
@@ -24,4 +24,6 @@ if (${PLATFORM} STREQUAL "Web")
     set_target_properties(${PROJECT_NAME} PROPERTIES SUFFIX ".html")
 endif()
 
+#
 # That's it! You should have an example executable that you can run. Have fun!
+#
